@@ -26,7 +26,9 @@
     "ytdl-core": "^2.1.2",
     "fs": "^0.0.2",
     "prism-media": "^1.2.2",
-    "node-opus": "^0.3.3"
+    "node-opus": "^0.3.3",
+    "opusscript": "^0.0.7",
+    "@discordjs/opus": "^0.3.2"
   },
   "devDependencies": {
     "minimist": ">=1.2.2"

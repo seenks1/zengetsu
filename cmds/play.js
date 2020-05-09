@@ -102,13 +102,13 @@ function sleep(milliseconds) {
 }
 
 async function play(client, ops, data) {
-	client.channels.get(data.queue[0].announcementChannel).send(`ðŸŽµ Now Playing: **${data.queue[0].songTitle}** ðŸŽµ | Requested by: @${data.queue[0].requester}`).then(msg => {msg.delete(10000)});
+	client.channels.get(data.queue[0].announcementChannel).send(`🎵 Now Playing: **${data.queue[0].songTitle}** 🎵 | Requested by: @${data.queue[0].requester}`).then(msg => {msg.delete(10000)});
 	//const input = await ytdl(data.queue[0].url)
 	//data.queue[0].url = 'https://www.youtube.com' + data.queue[0].url
 	//const pcm = input.pipe(new prism.opus.Decoder({rate: 48000, channels: 2, frameSize: 960}));
 	let songing = ytdl(data.queue[0].url).pipe(fs.createWriteStream('playing' + data.guildID + '.flv', {flags: 'w'}));
 	
-	await new Promise(done => setTimeout(done, 3000));
+	//await new Promise(done => setTimeout(done, 3000));
 	let readStream = fs.createReadStream('playing' + data.guildID + '.flv');
 		
 	data.dispatcher = await data.connection.playStream(readStream, {quality: 'highestaudio', highwatermark: 1>>25, type: 'opus'});
