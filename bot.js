@@ -2,20 +2,12 @@ const discordBotkit = require("botkit-discord");
 const fs = require('fs')
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const ownerID = '708769168744251422'
 client.commands = new Discord.Collection();
 
 const configuration = {
   token: process.env.DISCORD_TOKEN
 };
-
-const discordBot = discordBotkit(configuration);
-var normalizedPath = require("path").join(__dirname, "skills");
-
-require("fs")
-  .readdirSync(normalizedPath)
-  .forEach(function(file) {
-    require("./skills/" + file)(discordBot);
-  });
 
 let statuses = ['Hanging with the boys!', 'Breaking the mainframe', 'Coding...', 'Creating a better world...'];
 
@@ -92,5 +84,21 @@ client.on('message', async message => {
 	//}
 	
 	if (message.author.bot) return;
+  
+  try {
+	let messageArray = message.content.split(/\s+/g);
+	let ops = {
+		ownerID: ownerID,
+	}
+		
+	let command = messageArray[0]
+	let args = messageArray.slice(1)
+	const mess = message.content.toLowerCase();
+	let cmd = client.commands.get(command.slice('z!'.length));
+	if (cmd) cmd.run(client, message, args, ops);	
+} catch (e) {
+	console.log(e.stack);
+}
 });
-module.exports = discordBot;
+
+
