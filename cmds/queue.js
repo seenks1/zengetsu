@@ -13,7 +13,7 @@ module.exports.run = async (client, message, args, ops) => {
 	
 	
 	let resp = (`Now Playing: **${nowPlaying.songTitle}** | Requested by: **${nowPlaying.requester}**\n\n *Current Queue:*\n\n`);
-	for (var i = 1; i < 5; i++) {
+	for (var i = 1; i < queue.length && i < 5; i++) {
 		resp += (`Queue:`, `${i}. **${queue[i].songTitle}** | Requested By: **${queue[i].requester}**\n\n`);
 	}
 		

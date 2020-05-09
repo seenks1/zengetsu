@@ -82,7 +82,7 @@ module.exports.run = async (client, message, args, ops) => {
 		} else {
 			
 			if (playlist) return undefined;
-			else message.channel.send(`Added To Queue: *${info.title}* | Request By: ${data.queue[0].requester} `).then(msg => {msg.delete(10000)});
+			else message.channel.send(`Added To Queue: **${info.title}** | Request By: ${data.queue[0].requester} `).then(msg => {msg.delete(10000)});
 		}
 			
 			ops.active.set(message.guild.id, data);
