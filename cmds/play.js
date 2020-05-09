@@ -105,13 +105,13 @@ async function play(client, ops, data) {
 	//const input = await ytdl(data.queue[0].url)
 	//data.queue[0].url = 'https://www.youtube.com' + data.queue[0].url
 	//const pcm = input.pipe(new prism.opus.Decoder({rate: 48000, channels: 2, frameSize: 960}));
-	let songing = ytdl(data.queue[0].url).pipe(fs.createWriteStream('playing' + data.guildID + '.flv', {flags: 'w'}));
+	//let songing = ytdl(data.queue[0].url).pipe(fs.createWriteStream('playing' + data.guildID + '.flv', {flags: 'w'}));
 	
-	await new Promise(done => setTimeout(done, 3000));
-	let readStream = fs.createReadStream('playing' + data.guildID + '.flv');
+	//await new Promise(done => setTimeout(done, 3000));
+	//let readStream = fs.createReadStream('playing' + data.guildID + '.flv');
 		
-	data.dispatcher = await data.connection.playStream(readStream, {quality: 'highestaudio', highwatermark: 1>>25, type: 'opus'});
-	//data.dispatcher = data.connection.playStream(ytdl(data.queue[0].url, {quality: 'highestaudio'}));
+	//data.dispatcher = await data.connection.playStream(readStream, {quality: 'highestaudio', highwatermark: 1>>25, type: 'opus'});
+	data.dispatcher = data.connection.playStream(ytdl(data.queue[0].url, {quality: 'highestaudio'}));
 	//data.dispatcher = await data.connection.playConvertedStream(await pcm, {filter: 'audioonly', quality: 'highestaudio', highwatermark: 1>>25});
 	data.dispatcher.guildID = data.guildID
 	
@@ -121,7 +121,7 @@ async function play(client, ops, data) {
 }
 
 function finish(client, ops, dispatcher) {
-	let loop = require('./cmds/loop.js')
+	let loop = require('./loop.js')
 	let fetched = ops.active.get(dispatcher.guildID);
 	if(loop.loop === true) {
 		console.log('Looping is currently Enabled.');
