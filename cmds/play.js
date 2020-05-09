@@ -41,7 +41,7 @@ module.exports.run = async (client, message, args, ops) => {
 				await handleVideo(video3, message, voiceChannel, true);
 			}
 			
-			return message.channel.send(`**Playlist has been added to the queue.**`);
+			return message.channel.send(`**Spotify playlist has been added to the queue.**`);
 		}
 		
 		spotifyFTest();
