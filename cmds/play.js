@@ -10,7 +10,6 @@ const playlistDebugger = "https://www.youtube.com/playlist?list=PL8H85HKySx23uHk
 const youtube = new YouTube('AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw');
 
 module.exports.run = async (client, message, args, ops) => {
-  console.log(message.member.voiceChannel)
 	if (!message.member.voiceChannel) return message.channel.send('You are not currently connected to a voice channel!');
 	let voiceChannel = message.member.voiceChannel
 		
@@ -108,7 +107,7 @@ async function play(client, ops, data) {
 	//const pcm = input.pipe(new prism.opus.Decoder({rate: 48000, channels: 2, frameSize: 960}));
 	let songing = ytdl(data.queue[0].url).pipe(fs.createWriteStream('playing' + data.guildID + '.flv', {flags: 'w'}));
 	
-	//await new Promise(done => setTimeout(done, 3000));
+	await new Promise(done => setTimeout(done, 3000));
 	let readStream = fs.createReadStream('playing' + data.guildID + '.flv');
 		
 	data.dispatcher = await data.connection.playStream(readStream, {quality: 'highestaudio', highwatermark: 1>>25, type: 'opus'});

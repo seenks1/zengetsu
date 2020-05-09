@@ -22,8 +22,7 @@ module.exports.run = async (client, message, args, ops) => {
 		.setColor(0xFFFF00)
 		.setAuthor('Queue Information:')
 		.setTitle('Now Playing:')
-		.setDescription(resp)
-		.addField('☐☐☐☐◯☐☐☐☐'))
+		.setDescription(resp))
 		
 
 	
