@@ -2,6 +2,7 @@ const discordBotkit = require("botkit-discord");
 const fs = require('fs')
 const Discord = require('discord.js');
 const client = new Discord.Client();
+client.commands = new Discord.Collection();
 
 const configuration = {
   token: process.env.DISCORD_TOKEN
@@ -19,7 +20,7 @@ require("fs")
 let statuses = ['Hanging with the boys!', 'Breaking the mainframe', 'Coding...', 'Creating a better world...'];
 
 
-fs.readdir("./", (err, files) => {
+fs.readdir("./cmds/", (err, files) => {
 	if (err) console.error(err);
 	 let jsfiles = files.filter(f => f.split(".").pop() === 'js');
 	 if(jsfiles.length <= 0) {
@@ -30,7 +31,7 @@ fs.readdir("./", (err, files) => {
 	 console.log(`Loading ${jsfiles.length} commands!`);
 	 
 	 jsfiles.forEach((f,i) => {
-		let props = require(`./${f}`);
+		let props = require(`./cmds/${f}`);
 		console.log(`${i + 1}: ${f} loaded!`);
 		client.commands.set(props.help.name, props);
 	 });
