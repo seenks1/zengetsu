@@ -11,7 +11,7 @@ const youtube = new YouTube('AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw');
 
 module.exports.run = async (client, message, args, ops) => {
   console.log(message.member.voiceChannel)
-	//if (!message.member.voiceChannel) return message.channel.send('You are not currently connected to a voice channel!');
+	if (!message.member.voiceChannel) return message.channel.send('You are not currently connected to a voice channel!');
 	let voiceChannel = message.member.voiceChannel
 		
 	if (!args[0]) return message.channel.send('Sorry, please input a url following the play command!');
@@ -53,7 +53,7 @@ module.exports.run = async (client, message, args, ops) => {
 	}
 	
 	
-	let video = await youtube.getVideo('https://www.youtube.com' + args[0]);
+	let video = await youtube.getVideo(args[0]);
 	return handleVideo(video, message, voiceChannel);
 	
 	async function handleVideo(video, msg, voiceChannel, playlist = false) {

@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 module.exports.run = (client, message, args, ops) => {
 	
 	search(args.join(' '), function(err, res) {
-		if (err) return message.channel.send('Sorry, something went wrong.');
+		if (err) return console.log(err)
 		
 		let videos = res.videos.slice(0,10); 
 		
