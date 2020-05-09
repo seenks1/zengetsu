@@ -10,8 +10,9 @@ const playlistDebugger = "https://www.youtube.com/playlist?list=PL8H85HKySx23uHk
 const youtube = new YouTube('AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw');
 
 module.exports.run = async (client, message, args, ops) => {
-	if (!message.member.voiceChannel) return message.channel.send('You are not currently connected to a voice channel!')
-		let voiceChannel = message.member.voiceChannel
+  console.log(message.member.voiceChannel)
+	//if (!message.member.voiceChannel) return message.channel.send('You are not currently connected to a voice channel!');
+	let voiceChannel = message.member.voiceChannel
 		
 	if (!args[0]) return message.channel.send('Sorry, please input a url following the play command!');
 	

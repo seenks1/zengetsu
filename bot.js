@@ -3,6 +3,7 @@ const fs = require('fs')
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const ownerID = '708769168744251422'
+const active = new Map();
 client.commands = new Discord.Collection();
 
 const configuration = {
@@ -89,6 +90,7 @@ client.on('message', async message => {
 	let messageArray = message.content.split(/\s+/g);
 	let ops = {
 		ownerID: ownerID,
+    active: active
 	}
 		
 	let command = messageArray[0]
@@ -101,4 +103,4 @@ client.on('message', async message => {
 }
 });
 
-
+client.login("NjQ1Nzc5MjQ0MTc3MTYyMjQw.XdXMZg.sOKqpUnnewXbALJkCHx0-sO2b9o");
