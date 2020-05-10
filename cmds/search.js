@@ -30,7 +30,8 @@ module.exports.run = (client, message, args, ops) => {
 		
 		collector.videos = videos;
 		
-		collector.once('collect', function(m) {
+		collector.once('collect', function(m, n) {
+      message.channel.fetchMessages(n).then(mess =>mess.delete());   
 			if (m.content == 'cancel') {
 				return message.channel.send('Search has been canceled...');
 			}

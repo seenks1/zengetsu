@@ -33,10 +33,10 @@ module.exports.run = async (client, message, args, ops) => {
 		//.setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/hqdefault.jpg`, true)
 		.setPage(1)
 		.setColor(0xFFFF00)
-		.setAuthor('Queue Information:')
+		.setAuthor('📞 Queue Information: 📞')
 		.setTitle('Now Playing:')
 		.setDescription(resp)
-    .addField(`The queue is currently ${queue.length} song(s) long`)
+    .setFooter(`The queue is currently ${queue.length} song(s) long`)
 		.build();
 }
 

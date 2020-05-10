@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args, ops) => {
 	let required = Math.ceil(userCount/2);
 	if (!fetched.queue[0].voteSkips) fetched.queue[0].voteSkips = [];
 	
-	if (fetched.queue[0].voteSkips.includes(message.member.id)) return message.channel.send(`Sorry, you already voted to skip this song! ${fetched.queue[0].voteSkips.length}/${required} required.`);
+	if (fetched.queue[0].voteSkips.includes(message.member.id)) return message.channel.send(`Sorry, you already voted to skip this song! **${fetched.queue[0].voteSkips.length}/${required} required.`);
 	
 	fetched.queue[0].voteSkips.push(message.member.id);
 	ops.active.set(message.guild.id, fetched);
