@@ -18,7 +18,7 @@ module.exports.run = async (client, message, args, ops) => {
 	}
 		
 	embeds.push(new Discord.RichEmbed()
-		.setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/hqdefault.jpg`, true)
+		//.setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/hqdefault.jpg`, true)
 		.setColor(0xFFFF00)
 		.setAuthor('Queue Information:')
 		.setTitle('Now Playing:')
@@ -36,7 +36,7 @@ module.exports.run = async (client, message, args, ops) => {
 		.setAuthor('Queue Information:')
 		.setTitle('Now Playing:')
 		.setDescription(resp)
-  
+    .addField(`Showing 5 songs out of  ${queue.length}`)
 		.build();
 }
 
