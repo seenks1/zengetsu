@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args, ops) => {
 	ops.active.set(message.guild.id, fetched);
 	
 	if(fetched.queue[0].voteSkips.length >= required) {
-		message.channel.send('Successfully skipped song!');
+		message.channel.send('✔️ Successfully skipped song!');
 		sleep(1000)
 		return fetched.dispatcher.emit('end');
 	}
