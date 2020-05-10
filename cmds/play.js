@@ -101,7 +101,7 @@ function sleep(milliseconds) {
 }
 
 async function play(client, ops, data) {
-	var channel = client.channels.fetch(data.queue[0].announcementChannel)
+	var channel = client.channels.cache.get(data.queue[0].announcementChannel)
   console.log(channel)
   channel.send(`🎵 Now Playing: **${data.queue[0].songTitle}** 🎵 | Requested by: @${data.queue[0].requester}`).then(msg => {msg.delete(10000)});
 	//const input = await ytdl(data.queue[0].url)

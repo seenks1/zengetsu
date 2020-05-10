@@ -17,7 +17,7 @@ module.exports.run = async (client, message, args, ops) => {
 		resp += (`Queue:`, `${i}. **${queue[i].songTitle}** | Requested By: **${queue[i].requester}**\n\n`);
 	}
 		
-	embeds.push(new Discord.RichEmbed()
+	embeds.push(new Discord.MessageEmbed
 		//.setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/hqdefault.jpg`, true)
 		.setColor(0xFFFF00)
 		.setAuthor('Queue Information:')
