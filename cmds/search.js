@@ -16,7 +16,7 @@ module.exports.run = (client, message, args, ops) => {
 		
 		resp += `\n**Choose a number between** \`1-${videos.length}\``;
 		
-		let embed = new Discord.RichEmbed()
+		let embed = new Discord.MessageEmbed()
 			.setColor(0xFFFF00)
 			.setTitle('Results')
 			.setDescription(resp)
@@ -31,7 +31,7 @@ module.exports.run = (client, message, args, ops) => {
 		collector.videos = videos;
     
 		collector.once('collect', function(m, n) {
-      message.channel.fetchMessages(n).then(mess =>mess.delete());   
+      message.channel.messages.fetch(n).then(mess =>mess.delete());   
 			let commandFile = require(`./play.js`);
 			commandFile.run(client, message, [this.videos[parseInt(m.content)-1].url], ops);
 		});

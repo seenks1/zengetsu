@@ -10,7 +10,7 @@ const playlistDebugger = "https://www.youtube.com/playlist?list=PL8H85HKySx23uHk
 const youtube = new YouTube('AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw');
 
 module.exports.run = async (client, message, args, ops) => {
-	if (!message.member.voiceChannel) return message.channel.send('You are not currently connected to a voice channel!');
+	if (!message.member.voice) return message.channel.send('You are not currently connected to a voice channel!');
 	let voiceChannel = message.member.voiceChannel
 		
 	if (!args[0]) return message.channel.send('Sorry, please input a url following the play command!');
@@ -64,7 +64,7 @@ module.exports.run = async (client, message, args, ops) => {
 		};
 		let data = ops.active.get(message.guild.id) || {};
 		const queue = data.queue
-		if (!data.connection) data.connection = await message.member.voiceChannel.join(); //If there isn't a connection create one
+		if (!data.connection) data.connection = await message.member.voice.join(); //If there isn't a connection create one
 		if(!data.queue) data.queue = [];
 		data.guildID = message.guild.id;
 			
@@ -111,7 +111,7 @@ async function play(client, ops, data) {
 	//let readStream = fs.createReadStream('playing' + data.guildID + '.flv');
 		
 	//data.dispatcher = await data.connection.playStream(readStream, {quality: 'highestaudio', highwatermark: 1>>25, type: 'opus'});
-	data.dispatcher = data.connection.playStream(ytdl(data.queue[0].url, {quality: 'highestaudio'}));
+	data.dispatcher = data.connection.play(ytdl(data.queue[0].url, {quality: 'highestaudio'}));
 	//data.dispatcher = await data.connection.playConvertedStream(await pcm, {filter: 'audioonly', quality: 'highestaudio', highwatermark: 1>>25});
 	data.dispatcher.guildID = data.guildID
 	
