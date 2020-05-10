@@ -23,18 +23,15 @@ module.exports.run = (client, message, args, ops) => {
 	
 		message.channel.send(embed);
 		
-		const filter = m => (!isNaN(m.content)) && m.content < videos.length + 1 && m.content > 0 && m.author.id === message.author.id;
+		const filter = m => !isNaN(m.content) && m.content < videos.length + 1 && m.content > 0 && m.author.id === message.author.id;
 		
 		const collector = message.channel.createMessageCollector(filter);
 		
 		
 		collector.videos = videos;
-		
+    
 		collector.once('collect', function(m, n) {
       message.channel.fetchMessages(n).then(mess =>mess.delete());   
-			if (m.content == 'cancel') {
-				return message.channel.send('Search has been canceled...');
-			}
 			let commandFile = require(`./play.js`);
 			commandFile.run(client, message, [this.videos[parseInt(m.content)-1].url], ops);
 		});
