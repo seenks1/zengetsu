@@ -30,12 +30,13 @@ module.exports.run = async (client, message, args, ops) => {
 		.setArray(embeds)
 		.setAuthorizedUsers([message.author.id])
 		.setChannel(message.channel)
-		.setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/hqdefault.jpg`, true)
+		//.setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/hqdefault.jpg`, true)
 		.setPage(1)
 		.setColor(0xFFFF00)
 		.setAuthor('Queue Information:')
 		.setTitle('Now Playing:')
 		.setDescription(resp)
+  
 		.build();
 }
 
