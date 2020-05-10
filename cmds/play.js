@@ -10,7 +10,7 @@ const playlistDebugger = "https://www.youtube.com/playlist?list=PL8H85HKySx23uHk
 const youtube = new YouTube('AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw');
 
 module.exports.run = async (client, message, args, ops) => {
-	if (!message.member.voice) return message.channel.send('You are not currently connected to a voice channel!');
+	if (!message.member.voice.channel) return message.channel.send('You are not currently connected to a voice channel!');
 	let voiceChannel = message.member.voiceChannel
 		
 	if (!args[0]) return message.channel.send('Sorry, please input a url following the play command!');
@@ -139,7 +139,7 @@ function finish(client, ops, dispatcher) {
 	} else {
 		ops.active.delete(dispatcher.guildID);
 		
-		let vc = client.guilds.get(dispatcher.guildID).me.voiceChannel;
+		let vc = client.guilds.resolve(dispatcher.guildID).me.voiceChannel;
 		if (vc) {
 			vc.leave();
 		}

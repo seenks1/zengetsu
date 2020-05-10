@@ -4,7 +4,6 @@ var queuelist = 0;
 
 module.exports.run = async (client, message, args, ops) => {
 	let fetched = ops.active.get(message.guild.id);
-	let embeds = [];
 	
 	if(!fetched) return message.channel.send('There currently isn\'t any music playing in this guild!');
 	
@@ -17,27 +16,16 @@ module.exports.run = async (client, message, args, ops) => {
 		resp += (`Queue:`, `${i}. **${queue[i].songTitle}** | Requested By: **${queue[i].requester}**\n\n`);
 	}
 		
-	embeds.push(new Discord.MessageEmbed
+	let embed = new Discord.MessageEmbed()
 		//.setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/hqdefault.jpg`, true)
-		.setColor(0xFFFF00)
-		.setAuthor('Queue Information:')
-		.setTitle('Now Playing:')
-		.setDescription(resp))
-		
-
-	
-	new Pagination.Embeds()
-		.setArray(embeds)
-		.setAuthorizedUsers([message.author.id])
-		.setChannel(message.channel)
-		//.setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/hqdefault.jpg`, true)
-		.setPage(1)
 		.setColor(0xFFFF00)
 		.setAuthor('📞 Queue Information: 📞')
 		.setTitle('Now Playing:')
 		.setDescription(resp)
     .setFooter(`The queue is currently ${queue.length} song(s) long`)
-		.build();
+  
+  message.channel.send(embed);
+  
 }
 
 module.exports.help = {
