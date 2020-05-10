@@ -97,7 +97,11 @@ client.on('message', async message => {
 	let args = messageArray.slice(1)
 	const mess = message.content.toLowerCase();
 	let cmd = client.commands.get(command.slice('z!'.length));
-	if (cmd) cmd.run(client, message, args, ops);	
+	if (cmd) {
+    cmd.run(client, message, args, ops)
+  } else if (!cmd && ) {
+    //message.channel.send('That command doesn\'t exist!')
+  }
 } catch (e) {
 	console.log(e.stack);
 }
