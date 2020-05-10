@@ -64,7 +64,7 @@ module.exports.run = async (client, message, args, ops) => {
 		};
 		let data = ops.active.get(message.guild.id) || {};
 		const queue = data.queue
-		if (!data.connection) data.connection = await message.member.voice.join(); //If there isn't a connection create one
+		if (!data.connection) data.connection = await message.member.voice.channel.join() //If there isn't a connection create one
 		if(!data.queue) data.queue = [];
 		data.guildID = message.guild.id;
 			
@@ -101,7 +101,9 @@ function sleep(milliseconds) {
 }
 
 async function play(client, ops, data) {
-	client.channels.get(data.queue[0].announcementChannel).send(`🎵 Now Playing: **${data.queue[0].songTitle}** 🎵 | Requested by: @${data.queue[0].requester}`).then(msg => {msg.delete(10000)});
+	var channel = client.channels.fetch(data.queue[0].announcementChannel)
+  console.log(channel)
+  channel.send(`🎵 Now Playing: **${data.queue[0].songTitle}** 🎵 | Requested by: @${data.queue[0].requester}`).then(msg => {msg.delete(10000)});
 	//const input = await ytdl(data.queue[0].url)
 	//data.queue[0].url = 'https://www.youtube.com' + data.queue[0].url
 	//const pcm = input.pipe(new prism.opus.Decoder({rate: 48000, channels: 2, frameSize: 960}));
@@ -115,7 +117,7 @@ async function play(client, ops, data) {
 	//data.dispatcher = await data.connection.playConvertedStream(await pcm, {filter: 'audioonly', quality: 'highestaudio', highwatermark: 1>>25});
 	data.dispatcher.guildID = data.guildID
 	
-	data.dispatcher.once('end', function() {
+	data.dispatcher.once('finish', function() {
 		finish(client, ops, data);
 	});
 }
