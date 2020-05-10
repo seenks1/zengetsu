@@ -28,7 +28,8 @@
     "prism-media": "^1.2.2",
     "node-opus": "^0.3.3",
     "opusscript": "^0.0.7",
-    "@discordjs/opus": "^0.3.2"
+    "@discordjs/opus": "^0.3.2",
+    "solenolyrics": "^5.0.0"
   },
   "devDependencies": {
     "minimist": ">=1.2.2"
