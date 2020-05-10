@@ -6,13 +6,13 @@ module.exports.run = async (client, message, args, ops) => {
 	
 	if (message.guild.me.voiceChannelID !== message.member.voiceChannelID) return message.channel.send('Sorry, we are not connected to the same voice channel!');
 	
-	if (fetched.dispatcher.paused) return message.channel.send('This music is already paused.');
+	if (!fetched.dispatcher.paused) return message.channel.send('This music isn\'t paused.');
 	
-	fetched.dispatcher.pause();
+	fetched.dispatcher.resume();
 	
-	message.channel.send(`✖️ Successfully paused **${fetched.queue[0].songTitle}**. ✖️`);
+	message.channel.send(`⚙️ Successfully resumed **${fetched.queue[0].songTitle}**. ⚙️`);
 }
 
 module.exports.help = {
-	name: 'pause'
+	name: 'resume'
 }
