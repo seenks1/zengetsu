@@ -13,9 +13,9 @@ module.exports.run = async (client, message, args, ops) => {
 	
 	if(!fetched) return message.channel.send('There currently isn\'t any music playing in the guild!');
 	
-	if (message.member.voiceChannel !== message.guild.me.voiceChannel) return message.channel.send('Sorry, you currently aren\'t in my voice channel!');
+	if (message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send('Sorry, you currently aren\'t in my voice channel!');
 	
-	let userCount = message.member.voiceChannel.members.size;
+	let userCount = message.member.voice.channel.members.size;
 	
 	let required = Math.ceil(userCount/2);
 	if (!fetched.queue[0].voteSkips) fetched.queue[0].voteSkips = [];
@@ -28,7 +28,7 @@ module.exports.run = async (client, message, args, ops) => {
 	if(fetched.queue[0].voteSkips.length >= required) {
 		message.channel.send('✔️ Successfully skipped song!');
 		sleep(1000)
-		return fetched.dispatcher.emit('end');
+		return fetched.dispatcher.emit('finish');
 	}
 	
 	
