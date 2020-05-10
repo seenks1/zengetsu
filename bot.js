@@ -99,8 +99,8 @@ client.on('message', async message => {
 	let cmd = client.commands.get(command.slice('z!'.length));
 	if (cmd) {
     cmd.run(client, message, args, ops)
-  } else if (!cmd && ) {
-    //message.channel.send('That command doesn\'t exist!')
+  } else if (!cmd && message.content.startsWith('z!')) {
+    message.channel.send('That command doesn\'t exist!')
   }
 } catch (e) {
 	console.log(e.stack);
