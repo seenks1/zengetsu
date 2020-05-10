@@ -36,7 +36,7 @@ module.exports.run = async (client, message, args, ops) => {
 		.setAuthor('Queue Information:')
 		.setTitle('Now Playing:')
 		.setDescription(resp)
-    .addField(`Showing 5 songs out of  ${queue.length}`)
+    .addField(`The queue is currently ${queue.length} song(s) long`)
 		.build();
 }
 
