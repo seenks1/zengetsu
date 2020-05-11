@@ -70,7 +70,7 @@ client.on("guildMemberAdd", function(message){
 		.setThumbnail(member.user.avatarURL())
 		.setFooter('Made by Kinetix')
 		
-	if (!message.member.bot) member.send(embed)
+	member.send(embed)
 		
 		
 });
