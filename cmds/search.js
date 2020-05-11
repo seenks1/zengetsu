@@ -31,9 +31,10 @@ module.exports.run = (client, message, args, ops) => {
 		collector.videos = videos;
     
 		collector.once('collect', function(m) {
-      message.channel.messages.fetch().then(messages => {
+      message.channel.messages.fetch({ limit: 1 }).then(messages => {
         const botMessages = messages.filter(msg => msg.author.bot);
-         message.channel.bulkDelete(botMessages);
+        console.log(botMessages)
+         botMessages.delete()
       });
 			let commandFile = require(`./play.js`);
 			commandFile.run(client, message, [this.videos[parseInt(m.content)-1].url], ops);
