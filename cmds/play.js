@@ -61,7 +61,24 @@ module.exports.run = async (client, message, args, ops) => {
     spotifyFTest();
     
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
-
+      message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
+      let data = ops.active.get(message.guild.id) || {};
+      const queue = data.queue;
+      if (!data.connection)
+        data.connection = await message.member.voice.channel.join(); //If there isn't a connection create one
+      if (!data.queue) data.queue = [];
+    
+      SC.init({
+        
+        clientId: 'dp8jYbqmo9I3kJhH02V2UjpLbmMgwbN5'
+        
+      })
+    
+      SC.stream(`/tracks/293`).then(stream => {
+        
+        stream.play()
+        
+      })
               
   } else if (!validate) {
      let commandFile = require(`./search.js`);
