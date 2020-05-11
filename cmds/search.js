@@ -21,7 +21,7 @@ module.exports.run = (client, message, args, ops) => {
 			.setTitle('Results')
 			.setDescription(resp)
 	
-		message.channel.send(embed);
+		message.channel.send(embed).then(msg => msg.delete({timeout: 10000}))
 		
 		const filter = m => !isNaN(m.content) && m.content < videos.length + 1 && m.content > 0 && m.author.id === message.author.id;
 		
@@ -33,7 +33,6 @@ module.exports.run = (client, message, args, ops) => {
 		collector.once('collect', function(m) {
       message.channel.messages.fetch({ limit: 1 }).then(messages => {
         const botMessages = messages.filter(msg => msg.author.bot);
-        console.log(botMessages)
          botMessages.delete()
       });
 			let commandFile = require(`./play.js`);

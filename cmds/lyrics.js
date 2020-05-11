@@ -12,7 +12,7 @@ module.exports.run = async (client, message, args, ops) => {
   let nowPlaying = queue[0];
   var lyrics = await solenolyrics.requestLyricsFor(queue[0]);
 
-  message.channel.send(lyrics);
+  message.channel.send(lyrics.trim());
 };
 
 module.exports.help = {
