@@ -3,21 +3,20 @@ const ytdl = require("ytdl-core");
 const prism = require("prism-media");
 const fs = require("fs");
 const YouTube = require("simple-youtube-api");
+const fetch = require('node-fetch');
 let loop = require("./loop.js");
 
 const { Youtubes, Spotify } = require("you-lister");
 const playlistDebugger =
   "https://www.youtube.com/playlist?list=PL8H85HKySx23uHki_zJvAuqKZG8CaKdUz";
-const SoundCloudAudio = require("soundcloud-audio");
 const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
-const scPlayer = new SoundCloudAudio("dp8jYbqmo9I3kJhH02V2UjpLbmMgwbN5");
 
 module.exports.run = async (client, message, args, ops) => {
   if (!message.member.voice.channel)
     return message.channel.send(
       "You are not currently connected to a voice channel!"
     );
-  let voiceChannel = message.member.voiceChannel;
+  let voiceChannel = message.member.voice.channel;
 
   if (!args[0])
     return message.channel.send(
@@ -59,10 +58,16 @@ module.exports.run = async (client, message, args, ops) => {
     }
 
     spotifyFTest();
+    
   } else if (!validate && args[0].includes("https://api.soundcloud.com/")) {
-    scPlayer.play({
-      streamURL: args[0]
-    });
+    let data = ops.active.get(message.guild.id) || {};
+    fetch(args[0])
+      .then(res => {
+        const dest = fs.createWriteStream('playing' + '.flv', {flags: 'w'});
+        let readStream = fs.createReadStream('playing' + '.flv');
+        data.dispatcher = data.connection.playStream(readStream, {quality: 'highestaudio', highwatermark: 1>>25, type: 'opus'});
+      })
+
   } else if (!validate) {
     let commandFile = require(`./search.js`);
     return commandFile.run(client, message, args, ops);
