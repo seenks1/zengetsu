@@ -61,7 +61,7 @@ module.exports.run = async (client, message, args, ops) => {
     spotifyFTest();
     
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
-      //message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
+      return message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
       var express = require('express');
       var app = express();
       var soundcloudr = require('soundcloudr');
