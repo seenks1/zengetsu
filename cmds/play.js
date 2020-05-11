@@ -123,7 +123,7 @@ async function play(client, ops, data) {
       `🎵 Now Playing: **${data.queue[0].songTitle}** 🎵 | Requested by: @${data.queue[0].requester}`
     )
     .then(msg => {
-      msg.delete(10000);
+      msg.delete({timeout: 10000});
     });
   //const input = await ytdl(data.queue[0].url)
   //data.queue[0].url = 'https://www.youtube.com' + data.queue[0].url
