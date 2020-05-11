@@ -157,7 +157,7 @@ async function play(client, ops, data) {
 
   //data.dispatcher = await data.connection.playStream(readStream, {quality: 'highestaudio', highwatermark: 1>>25, type: 'opus'});
   data.dispatcher = data.connection.play(
-    ytdl(data.queue[0].url, { quality: "highestaudio" })
+    ytdl(data.queue[0].url, { quality: "highestaudio", highwatermark: '512', type: 'opus', filter: 'audioonly' })
   );
   //data.dispatcher = await data.connection.playConvertedStream(await pcm, {filter: 'audioonly', quality: 'highestaudio', highwatermark: 1>>25});
   data.dispatcher.guildID = data.guildID;
