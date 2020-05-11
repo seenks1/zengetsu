@@ -62,24 +62,25 @@ module.exports.run = async (client, message, args, ops) => {
     
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
       message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
-      let data = ops.active.get(message.guild.id) || {};
-      const queue = data.queue;
-      if (!data.connection)
-        data.connection = await message.member.voice.channel.join(); //If there isn't a connection create one
-      if (!data.queue) data.queue = [];
-    
-      SC.init({
-        
-        clientId: 'dp8jYbqmo9I3kJhH02V2UjpLbmMgwbN5'
-        
+      var express = require('express');
+      var app = express();
+      var soundcloudr = require('soundcloudr');
+      var fs = require('fs');
+
+      soundcloudr.setClientId(fs.readFile('clientId.txt', 'UTF-8'));
+
+      app.get('/download', function(req, res, next) {
+          var url = req.query.url;
+
+          soundcloudr.download(url, response, function(err) {
+              if(err) {
+                  res.status(err.status).json({
+                      message: err.message
+                  });
+              }
+          });
       })
-    
-      SC.stream(`/tracks/293`).then(stream => {
-        
-        stream.play()
-        
-      })
-              
+
   } else if (!validate) {
      let commandFile = require(`./search.js`);
      return commandFile.run(client, message, args, ops);
