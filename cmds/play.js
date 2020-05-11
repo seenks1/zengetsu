@@ -59,15 +59,6 @@ module.exports.run = async (client, message, args, ops) => {
 
     spotifyFTest();
     
-  } else if (!validate && args[0].includes("https://api.soundcloud.com/")) {
-    let data = ops.active.get(message.guild.id) || {};
-    fetch(args[0])
-      .then(res => {
-        const dest = fs.createWriteStream('playing' + '.flv', {flags: 'w'});
-        let readStream = fs.createReadStream('playing' + '.flv');
-        data.dispatcher = data.connection.playStream(readStream, {quality: 'highestaudio', highwatermark: 1>>25, type: 'opus'});
-      })
-
   } else if (!validate) {
     let commandFile = require(`./search.js`);
     return commandFile.run(client, message, args, ops);
