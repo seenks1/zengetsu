@@ -60,14 +60,14 @@ client.on("guildMemberAdd", function(message){
 	let guild = message.guild;
 	let member = message;
 	let membercount = client.users.size;
-	member.addRole('683170055579893772');
+	member.roles.add('683170055579893772');
 	
-	const embed = new Discord.RichEmbed()
+	const embed = new Discord.MessageEmbed()
 		.setColor(0xffffff)
 		.setTitle('Server - Welcome')
 		.setDescription(`Hello ${member.user}, welcome to this server!.`)
 		.addField('Welcome', `Welcome to this server! Please refer to the rules channel! If you have any questions for the admins, please message me and i will get right back with you :)`)
-		.setThumbnail(member.user.avatarURL)
+		.setThumbnail(member.user.avatarURL())
 		.setFooter('Made by Kinetix')
 		
 	member.send(embed)
