@@ -7,8 +7,6 @@ const fetch = require('node-fetch');
 let loop = require("./loop.js");
 
 const { Youtubes, Spotify } = require("you-lister");
-const SoundCloudAudio = require('soundcloud-audio');
-const scPlayer = new SoundCloudAudio('dp8jYbqmo9I3kJhH02V2UjpLbmMgwbN5');
 const playlistDebugger =
   "https://www.youtube.com/playlist?list=PL8H85HKySx23uHki_zJvAuqKZG8CaKdUz";
 const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
@@ -62,9 +60,16 @@ module.exports.run = async (client, message, args, ops) => {
     spotifyFTest();
     
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
-    scPlayer.resolve('https://soundcloud.com/djangodjango/first-light', function(track) {
-      return console.log(track)
-    })
+      const req = require("request");
+      const stream = req({
+        url: "https://api.soundcloud.com/tracks/257504021/stream",
+        followAllRedirects: true,
+        qs: {
+            client_id: "nope"
+        },
+        encoding: null
+      })
+      
               
   } else if (!validate) {
      let commandFile = require(`./search.js`);
