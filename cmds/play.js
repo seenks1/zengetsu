@@ -70,6 +70,19 @@ module.exports.run = async (client, message, args, ops) => {
         encoding: null
       })
       
+      let data = ops.active.get(message.guild.id) || {};
+      if (!data.connection) data.connection = await message.member.voice.channel.join(); //If there isn't a connection create one
+    
+      if (!data.queue) data.queue = [];
+      data.guildID = message.guild.id;
+    
+      data.queue.push({
+        requester: message.author.tag,
+        url: stream,
+        announcementChannel: message.channel.id,
+      });
+    
+     data.dispatcher = await data.connection.play(data.queue[0].url)
               
   } else if (!validate) {
      let commandFile = require(`./search.js`);
