@@ -63,7 +63,7 @@ module.exports.run = async (client, message, args, ops) => {
     let commandFile = require(`./search.js`);
     return commandFile.run(client, message, args, ops);
   }
-
+  
   let video = await youtube.getVideo(args[0]);
   return handleVideo(video, message, voiceChannel);
 
@@ -139,7 +139,6 @@ async function play(client, ops, data) {
   );
   //data.dispatcher = await data.connection.playConvertedStream(await pcm, {filter: 'audioonly', quality: 'highestaudio', highwatermark: 1>>25});
   data.dispatcher.guildID = data.guildID;
-
   data.dispatcher.once("finish", function() {
     finish(client, ops, data);
   });
