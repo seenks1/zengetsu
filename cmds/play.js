@@ -7,7 +7,9 @@ let loop = require('./loop.js')
 
 const { Youtubes, Spotify } = require('you-lister')
 const playlistDebugger = "https://www.youtube.com/playlist?list=PL8H85HKySx23uHki_zJvAuqKZG8CaKdUz";
+const SoundCloudAudio = require('soundcloud-audio');
 const youtube = new YouTube('AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw');
+const scPlayer = new SoundCloudAudio('YOUR_CLIENT_ID');
 
 module.exports.run = async (client, message, args, ops) => {
 	if (!message.member.voice.channel) return message.channel.send('You are not currently connected to a voice channel!');

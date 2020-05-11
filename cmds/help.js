@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 
 module.exports.run = async (client, message, args, ops) => {
   let embed = new Discord.MessageEmbed()
+    .setColor(0xFFFF00)
     .setTitle('**Commands**')
     .addField('Latency:', 'Shows the current ping between you and the server')
     .addField('Loop', 'Loops the current queue of music in the guild')
