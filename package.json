@@ -31,7 +31,8 @@
     "@discordjs/opus": "^0.3.2",
     "solenolyrics": "^5.0.0",
     "soundcloud-audio": "^1.4.0",
-    "soundcloud-v2-api": "^0.0.7"
+    "soundcloud-v2-api": "^0.0.7",
+    "soundcloudr": "^1.1.0"
   },
   "devDependencies": {
     "minimist": ">=1.2.2"
