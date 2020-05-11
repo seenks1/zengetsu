@@ -4,6 +4,7 @@ const prism = require("prism-media");
 const fs = require("fs");
 const YouTube = require("simple-youtube-api");
 const fetch = require('node-fetch');
+const SC = require('soundcloud-v2-api');
 let loop = require("./loop.js");
 
 const { Youtubes, Spotify } = require("you-lister");
@@ -60,29 +61,7 @@ module.exports.run = async (client, message, args, ops) => {
     spotifyFTest();
     
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
-      const req = require("request");
-      const stream = req({
-        url: "https://api.soundcloud.com/tracks/257504021/stream",
-        followAllRedirects: true,
-        qs: {
-            client_id: "nope"
-        },
-        encoding: null
-      })
-      
-      let data = ops.active.get(message.guild.id) || {};
-      if (!data.connection) data.connection = await message.member.voice.channel.join(); //If there isn't a connection create one
-    
-      if (!data.queue) data.queue = [];
-      data.guildID = message.guild.id;
-    
-      data.queue.push({
-        requester: message.author.tag,
-        url: stream,
-        announcementChannel: message.channel.id,
-      });
-    
-     data.dispatcher = await data.connection.play(data.queue[0].url)
+
               
   } else if (!validate) {
      let commandFile = require(`./search.js`);
