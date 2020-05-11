@@ -99,7 +99,7 @@ module.exports.run = async (client, message, args, ops) => {
             `Added To Queue: **${info.title}** | Request By: ${data.queue[0].requester} `
           )
           .then(msg => {
-            msg.delete(10000);
+            msg.delete({timeout: 10000});
           });
     }
 

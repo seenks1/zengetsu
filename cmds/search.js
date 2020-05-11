@@ -2,7 +2,7 @@ const search = require('yt-search');
 const Discord = require('discord.js')
 
 module.exports.run = (client, message, args, ops) => {
-	
+	let mid = ''
 	search(args.join(' '), function(err, res) {
 		if (err) return console.log(err)
 		
@@ -21,7 +21,7 @@ module.exports.run = (client, message, args, ops) => {
 			.setTitle('Results')
 			.setDescription(resp)
 	
-		message.channel.send(embed).then(msg => msg.delete({timeout: 10000}))
+		message.channel.send(embed).then(msg => mid = msg)
 		
 		const filter = m => !isNaN(m.content) && m.content < videos.length + 1 && m.content > 0 && m.author.id === message.author.id;
 		
@@ -31,10 +31,7 @@ module.exports.run = (client, message, args, ops) => {
 		collector.videos = videos;
     
 		collector.once('collect', function(m) {
-      message.channel.messages.fetch({ limit: 1 }).then(messages => {
-        const botMessages = messages.filter(msg => msg.author.bot);
-         botMessages.delete()
-      });
+      mid.delete()
 			let commandFile = require(`./play.js`);
 			commandFile.run(client, message, [this.videos[parseInt(m.content)-1].url], ops);
 		});
