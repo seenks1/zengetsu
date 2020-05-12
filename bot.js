@@ -52,15 +52,15 @@ client.on("ready",  async () => {
 		}, 3000)
 });
 
- /*client.on('messageDelete', message => {
+ client.on('messageDelete', message => {
   console.log(`${message.id} was deleted!`);
   // Partial messages do not contain any content so skip them
   if (!message.partial) {
-    message.channel.send(`Someone deleted a message! It had content: **"${message.content}"**`);
+    console.log(`Someone deleted a message! It had content: **"${message.content}"**`);
   }
 });
 
-*/
+
 //client.on('guildMemberRemove',(member) => {
     //client.channels.get("name", "welcome").send(`**${member.username}** has just left server.. Bye Bye`);
 //});
