@@ -5,6 +5,23 @@ module.exports.run = (client, message, args) => {
 	let user = message.mentions.users.first() || message.author;
   
 	user.presence.activities.forEach((activity) => {
+    
+    if (!user.presence.activities.length) {
+      
+        let sembed = new Discord.MessageEmbed()
+            .setAuthor(user.user.username, user.user.displayAvatarURL({ dynamic: true }))
+            .setColor("GREEN")
+            .setThumbnail(user.user.displayAvatarURL())
+            .addField("**No Status**", 'This user does not have any custom status!')
+            .setFooter(message.guild.name, message.guild.iconURL())
+            .setTimestamp()
+        
+        message.channel.send(sembed)
+      
+        return undefined;
+      
+    }
+    
     if (activity.type === 'LISTENING' && activity.name === 'Spotify' && activity.assets !== null) {
 		
       let trackIMG = `https:/i.scdn.co/image/${activity.assets.largeImage.slice(8)}.png`;
@@ -27,12 +44,9 @@ module.exports.run = (client, message, args) => {
 
       message.channel.send(embed);
 
-    } else {
-      message.channel.send('**This user isn\'t currently listening to anything on Spotify!**');
-    }
+    }    
     
   })
-	
 	
 }
 
