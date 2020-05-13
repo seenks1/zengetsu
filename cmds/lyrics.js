@@ -3,6 +3,11 @@ const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args, ops) => {
   let trimmed = ''
+  let mid = ''
+  const emojiToTrack = '➡️'
+  const reactionFilter = reaction => {
+    return reaction.name === emojiToTrack
+  }
   let fetched = ops.active.get(message.guild.id);
   if (!fetched)
     return message.channel.send(
@@ -28,7 +33,15 @@ module.exports.run = async (client, message, args, ops) => {
     .setDescription(trimmed + '...')
     .setFooter('Scraped using Soleno Lyrics')
   
-  message.channel.send(embed);
+  message.channel.send(embed).then(msg => mid = msg)
+  mid.react('⬅️')
+  mid.react('➡️')
+
+  let reactionCollector = new Discord.ReactionCollector(mid, reactionFilter);
+  
+  reactionCollector.on('ended', (collected, reason) => {
+    message.channel.send('Works so far!')
+  });
 };
 
 module.exports.help = {
