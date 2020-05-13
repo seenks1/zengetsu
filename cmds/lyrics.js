@@ -16,7 +16,13 @@ module.exports.run = async (client, message, args, ops) => {
 
   let queue = fetched.queue;
   let nowPlaying = queue[0];
-  var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
+  try{
+    var lyrics = solenolyrics.requestLyricsFor(queue[0].songTitle);
+  } catch (err) {
+    
+     message.channel.send('These things seem to be in another language, making me unable to print them. Please contact the bot owner for more info.')
+    
+  }
   var words = lyrics.split(" ");
   
   for (var i = 0; i < words.length - 1; i++) {
@@ -33,9 +39,8 @@ module.exports.run = async (client, message, args, ops) => {
     .setDescription(trimmed + '...')
     .setFooter('Scraped using Soleno Lyrics')
   
-  try{
-    message.channel.send(embed).then(msg => mid = msg.id)
-  } catch
+  message.channel.send(embed).then(msg => mid = msg.id)
+ 
   //console.log()
   //mid.react('⬅️')
   //mid.react('➡️')
