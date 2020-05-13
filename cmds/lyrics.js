@@ -12,14 +12,21 @@ module.exports.run = async (client, message, args, ops) => {
   let queue = fetched.queue;
   let nowPlaying = queue[0];
   var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
-  for (let i = 0; i < 1500; i++){
-    trimmed += lyrics[i]
+  var words = lyrics.split(" ");
+  
+  for (var i = 0; i < words.length - 1; i++) {
+    words[i] += " ";
+  }  
+  
+  for (let i = 0; i < 100; i++) {
+    trimmed += words[i]
   }
   
   let embed = new Discord.MessageEmbed()
     .setColor(0xFFFF00)
-    .setTitle('**Lyrics**')
-    .setDescription(trimmed)
+    .setTitle(`**Lyrics For: ${queue[0].songTitle}**`)
+    .setDescription(trimmed + '...')
+    .setFooter('Scraped using Soleno Lyrics')
   
   message.channel.send(embed);
 };
