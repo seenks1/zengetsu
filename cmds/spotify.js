@@ -4,7 +4,7 @@ module.exports.run = (client, message, args) => {
 	
 	let user = message.mentions.users.first() || message.author;
 	
-	if (user.presence.game !== null && user.presence.game.type === 2 && user.presence.game.name === 'Spotify' && user.presence.game.assets !== null) {
+	if (user.presence.activity !== null && user.presence.activity.type === 'LISTENING' && user.presence.activity.name === 'Spotify' && user.presence.activity.assets !== null) {
 		
 		let trackIMG = `https:/i.scdn.co/image/${user.presence.game.assets.largeImage.slice(8)}.png`;
 		
