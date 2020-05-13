@@ -13,4 +13,5 @@ module.exports.run = async (client, message, args, ops) => {
 
   let resp = `Now Playing: **${nowPlaying.songTitle}** | Requested by: **${nowPlaying.requester}**`;
   let embed = new Discord.MessageEmbed()
+    .setDescription(resp\n⭕)
 }
