@@ -11,7 +11,9 @@ module.exports.run = async (client, message, args, ops) => {
   let queue = fetched.queue;
   let nowPlaying = queue[0];
   var lyrics = await solenolyrics.requestLyricsFor(queue[0]);
-
+  for (let i = 0; i < string.length; i++){
+  console.log(string[i])
+}
   message.channel.send(lyrics.trim());
 };
 
