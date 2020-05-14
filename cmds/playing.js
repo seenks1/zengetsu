@@ -17,3 +17,7 @@ module.exports.run = async (client, message, args, ops) => {
   
   message.channel.send(embed)
 }
+
+module.exports.help = {
+  name: 'playing'
+}
