@@ -35,7 +35,7 @@ client.on("ready",  async () => {
 		console.log(`Bot is ready! ${client.user.username}`);
 		
 		try {
-			let link = await client.generateInvite(["ADMINISTRATOR"]);
+			let link = await client.generateInvite(["MANAGE_MESSAGES", 'EMBED_LINKS']);
 			console.log(link);
 		} catch(e) {
 			console.log(e.stack);
