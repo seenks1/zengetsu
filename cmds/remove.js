@@ -10,6 +10,7 @@ module.exports.run = async (client, message, args, ops) => {
   let nowPlaying = queue[0];
   
   if (!args[0]) return message.channel.send('You must specify which song you wish to remove!')
+  if (args[0] == 0) return message.channel.send('You cannot remove the currently playing song!')
   if (isNaN(args[0]) || args[0] > queue.length) return message.channel.send('That\'t not a valid queue position!')
   let index = args[0]
   message.channel.send(`Successful removed **${queue[index].songTitle}** from the queue!`)
