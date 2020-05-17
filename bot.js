@@ -106,7 +106,7 @@ client.on('message', async message => {
 	let args = messageArray.slice(1)
 	const mess = message.content.toLowerCase();
 	let cmd = client.commands.get(command.slice('z!'.length));
-	if (cmd) {
+	if (cmd && message.content.startsWith('z!')) {
     cmd.run(client, message, args, ops)
   } else if (!cmd && message.content.startsWith('z!')) {
     message.channel.send('That command doesn\'t exist!')
