@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const Pagination = require("discord-paginationembed");
 var queuelist = 0;
 
 module.exports.run = async (client, message, args, ops) => {

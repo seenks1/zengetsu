@@ -4,7 +4,7 @@ const prism = require("prism-media");
 const fs = require("fs");
 const YouTube = require("simple-youtube-api");
 const fetch = require('node-fetch');
-const SC = require('soundcloud-v2-api');
+const Soundcloud = require('soundcloud.ts')
 let loop = require("./loop.js");
 
 const { Youtubes, Spotify } = require("you-lister");
@@ -61,25 +61,9 @@ module.exports.run = async (client, message, args, ops) => {
     spotifyFTest();
     
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
-      return message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
-      var express = require('express');
-      var app = express();
-      var soundcloudr = require('soundcloudr');
-      var fs = require('fs');
-
-      soundcloudr.setClientId('rHj5rctUqJxgO6Csb9Rp1emlMxVMcenb');
-
-      app.get('/download', function(req, res, next) {
-          var url = req.query.url;
-
-          soundcloudr.download(url, res, function(err) {
-              if(err) {
-                  res.status(err.status).json({
-                      message: err.message
-                  });
-              }
-          });
-      })
+      //return message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
+      const track = await Soundcloud.tracks.get(args[0])
+      console.log(track)
 
   } else if (!validate) {
      let commandFile = require(`./search.js`);
