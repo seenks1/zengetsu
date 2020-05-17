@@ -4,7 +4,7 @@ const prism = require("prism-media");
 const fs = require("fs");
 const YouTube = require("simple-youtube-api");
 const fetch = require('node-fetch');
-const Soundcloud = require('soundcloud.ts')
+import Soundcloud from 'soundcloud.ts'
 let loop = require("./loop.js");
 
 const { Youtubes, Spotify } = require("you-lister");
@@ -62,7 +62,8 @@ module.exports.run = async (client, message, args, ops) => {
     
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
       //return message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
-      const track = await Soundcloud.tracks.get(args[0])
+      const soundcloud = new Soundcloud()
+      const track = await soundcloud.tracks.get(args[0])
       console.log(track)
 
   } else if (!validate) {
