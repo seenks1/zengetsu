@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 var queuelist = 0;
 
 module.exports.run = async (client, message, args, ops) => {
-  const ayy = client.emojis.find(emoji => emoji.name === "loading");
   let fetched = ops.active.get(message.guild.id);
 
   if (!fetched)

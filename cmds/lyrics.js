@@ -39,17 +39,8 @@ module.exports.run = async (client, message, args, ops) => {
     .setDescription(trimmed + '...')
     .setFooter('Scraped using Soleno Lyrics')
   
-  message.channel.send(embed).then(msg => mid = msg.id)
- 
-  //console.log()
-  //mid.react('⬅️')
-  //mid.react('➡️')
-
-  let reactionCollector = new Discord.ReactionCollector(mid, reactionFilter);
+  message.channel.send(embed)
   
-  reactionCollector.on('ended', (collected, reason) => {
-    message.channel.send('Works so far!')
-  });
 };
 
 module.exports.help = {
