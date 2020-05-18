@@ -38,6 +38,26 @@ module.exports.run = async (client, message, args, ops) => {
       pages.push(trimmed)
       trimmed = ''
     }
+    if (i == 300) {
+      pages.push(trimmed)
+      trimmed = ''
+    }
+    if (i == 400) {
+      pages.push(trimmed)
+      trimmed = ''
+    }
+    if (i == 500) {
+      pages.push(trimmed)
+      trimmed = ''
+    }
+    if (i == 600) {
+      pages.push(trimmed)
+      trimmed = ''
+    }
+    if (i == 700) {
+      pages.push(trimmed)
+      trimmed = ''
+    }
   }
   
   let embed = new Discord.MessageEmbed()
@@ -54,9 +74,9 @@ module.exports.run = async (client, message, args, ops) => {
       const backwardsFilter = (reaction, user) => reaction.emoji.name === '⬅️' && user.id === message.author.id;
       const forwardsFilter = (reaction, user) => reaction.emoji.name === '➡️' && user.id === message.author.id;
       
-      const backwards = msg.createReactionCollector(backwardsFilter, {time: 60000});
+      const backwards = msg.createReactionCollector(backwardsFilter);
       
-      const forwards = msg.createReactionCollector(forwardsFilter, {time: 60000});
+      const forwards = msg.createReactionCollector(forwardsFilter);
       
       backwards.on('collect', r => {
         if (page === 1) return;
