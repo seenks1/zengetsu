@@ -17,7 +17,11 @@ module.exports.run = async (client, message, args, ops) => {
   let resp = `Now Playing: **${nowPlaying.songTitle}** | Requested by: **${nowPlaying.requester}**\n\n *Current Queue:*\n\n`;
   for (var i = 1; i < queue.length; i++) {
     resp += (`Queue:`,`${i}. **${queue[i].songTitle}** | Requested By: **${queue[i].requester}**\n\n`);
-    if (i % 6 === 0) {
+    if (i == 5 || i == 1) {
+      pages.push(resp)
+      let resp = ''
+    }
+    if (i == 10) {
       pages.push(resp)
       let resp = ''
     }
