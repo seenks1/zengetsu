@@ -3,7 +3,6 @@ const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args, ops) => {
   
-  let trimmed = ''
   let pages = []
   let page = 1;
   
@@ -23,19 +22,28 @@ module.exports.run = async (client, message, args, ops) => {
     
   }
   var words = lyrics.split(" ");
+  let trimmed = ''
   
   for (var i = 0; i < words.length - 1; i++) {
     words[i] += " ";
   }  
   
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < words.length; i++) {
     trimmed += words[i]
+    if (i == 100) {
+      pages.push(trimmed)
+      trimmed = ''
+    }
+    if (i == 200) {
+      pages.push(trimmed)
+      trimmed = ''
+    }
   }
   
   let embed = new Discord.MessageEmbed()
     .setColor(0xFFFF00)
     .setTitle(`**Lyrics For: ${queue[0].songTitle}**`)
-    .setDescription(trimmed + '...')
+    .setDescription(pages[page-1])
     .setFooter(`Page ${page} of ${pages.length}`)
   
   message.channel.send(embed).then(msg => {
@@ -73,4 +81,3 @@ module.exports.run = async (client, message, args, ops) => {
 module.exports.help = {
   name: "lyrics"
 };
-.
