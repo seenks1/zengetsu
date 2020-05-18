@@ -13,6 +13,7 @@ const playlistDebugger =
 const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
 
 module.exports.run = async (client, message, args, ops) => {
+  const emoji = message.guild.emojis.cache.first();
   if (!message.member.voice.channel)
     return message.channel.send(
       "You are not currently connected to a voice channel!"
@@ -100,14 +101,7 @@ module.exports.run = async (client, message, args, ops) => {
       play(client, ops, data);
     } else {
       if (playlist) return undefined;
-      else
-        message.channel
-          .send(
-            `Added To Queue: **${info.title}** | Request By: ${data.queue[0].requester} `
-          )
-          .then(msg => {
-            msg.delete({timeout: 10000});
-          });
+      else message.channel.send(`${emoji} Loading...`).then((sentMessage) => sentMessage.edit(`Added To Queue: **${info.title}** | Request By: ${data.queue[0].requester} `)).then(msg => {msg.delete({timeout: 10000});});
     }
 
     ops.active.set(message.guild.id, data);
