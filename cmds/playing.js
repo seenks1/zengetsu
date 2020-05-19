@@ -13,6 +13,7 @@ module.exports.run = async (client, message, args, ops) => {
 
   let resp = `Now Playing: **${nowPlaying.songTitle}** | Requested by: **${nowPlaying.requester}**`;
   let embed = new Discord.MessageEmbed()
+    .setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/maxresdefault.jpg`, true)
     .setDescription(`${resp}\nLink to track: [Click Here](${queue[0].url})`)
   
   message.channel.send(embed)
