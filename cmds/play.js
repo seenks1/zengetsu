@@ -84,7 +84,9 @@ module.exports.run = async (client, message, args, ops) => {
     let info = {
       id: video.id,
       title: video.title,
-      url: `https://www.youtube.com/watch?v=${video.id}`
+      url: `https://www.youtube.com/watch?v=${video.id}`,
+      durationSec: video.duration.seconds,
+      durationMin: video.duration.minutes
     };
     let data = ops.active.get(message.guild.id) || {};
     const queue = data.queue;
@@ -98,7 +100,9 @@ module.exports.run = async (client, message, args, ops) => {
       requester: message.author.tag,
       url: info.url,
       announcementChannel: message.channel.id,
-      thumbnail: info.id
+      thumbnail: info.id,
+      durationSec: info.durationSec,
+      durationMin: info.durationMin
     });
 
     if (!data.dispatcher) {
