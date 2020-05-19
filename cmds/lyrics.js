@@ -21,7 +21,12 @@ module.exports.run = async (client, message, args, ops) => {
      message.channel.send('These things seem to be in another language, making me unable to print them. Please contact the bot owner for more info.')
     
   }
-  var words = lyrics.split(" ");
+  
+  try {
+    var words = lyrics.split(" ");
+  } catch (err) {
+    return message.channel.send('No lyrics could be found for that song!')
+  }
   let trimmed = ''
   
   for (var i = 0; i < words.length - 1; i++) {

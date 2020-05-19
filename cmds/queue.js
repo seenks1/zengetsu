@@ -25,7 +25,7 @@ module.exports.run = async (client, message, args, ops) => {
     .setAuthor("📞 Queue Information: 📞")
     .setTitle("Now Playing:")
     .setDescription(resp)
-    .setFooter(`Page ${page} of ${pages.length}`);
+    .setFooter(`The queue is currently ${queue.length} song(s) long`);
 
   message.channel.send(embed)
   
