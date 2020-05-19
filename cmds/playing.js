@@ -15,6 +15,7 @@ module.exports.run = async (client, message, args, ops) => {
 
   let resp = `Now Playing: **${nowPlaying.songTitle}** | Requested by: **${nowPlaying.requester}**`;
   let embed = new Discord.MessageEmbed()
+    .setColor(0xffff00)
     .setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/maxresdefault.jpg`, true)
     .setDescription(`${resp}\n\nCurrent Elapsed Time: **${time} - ${data.queue[0].durationMin}:${data.queue[0].durationSec}**\n\nLink to track: [Click Here](${queue[0].url})`)
   
