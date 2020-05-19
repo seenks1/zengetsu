@@ -13,7 +13,7 @@ module.exports.run = async (client, message, args, ops) => {
 
   let resp = `Now Playing: **${nowPlaying.songTitle}** | Requested by: **${nowPlaying.requester}**`;
   let embed = new Discord.MessageEmbed()
-    .setDescription(`${resp}`)
+    .setDescription(`${resp}\nLink to track: [Click Here](${queue[0].url})`)
   
   message.channel.send(embed)
 }
