@@ -32,36 +32,14 @@ module.exports.run = async (client, message, args, ops) => {
   for (var i = 0; i < words.length - 1; i++) {
     words[i] += " ";
   }  
-  
+  let w = 0
   for (let i = 0; i < words.length; i++) {
     trimmed += words[i]
-    if (i == 100) {
+    w++
+    if (w == 100 || w == words.length) {
       pages.push(trimmed)
       trimmed = ''
-    }
-    if (i == 200) {
-      pages.push(trimmed)
-      trimmed = ''
-    }
-    if (i == 300) {
-      pages.push(trimmed)
-      trimmed = ''
-    }
-    if (i == 400) {
-      pages.push(trimmed)
-      trimmed = ''
-    }
-    if (i == 500) {
-      pages.push(trimmed)
-      trimmed = ''
-    }
-    if (i == 600) {
-      pages.push(trimmed)
-      trimmed = ''
-    }
-    if (i == 700) {
-      pages.push(trimmed)
-      trimmed = ''
+      w = 0
     }
   }
   
