@@ -5,7 +5,6 @@ const genius = new Genius.Client('3A2SNZticI1E2Yyd7U1OiZsCQ7v_cz2HZWUnkMisKoYng-
 
 module.exports.run = async (client, message, args, ops) => {
   
-  let lyric = ''
   let pages = []
   let page = 1;
   
@@ -17,16 +16,8 @@ module.exports.run = async (client, message, args, ops) => {
 
   let queue = fetched.queue;
   let nowPlaying = queue[0];
-  genius.tracks.search(queue[0].songTitle).then(async asu => {
-      const track = await genius.tracks.get(`${asu[0].id}`);
-      const lyrics = await track.lyrics();
-      const id = track.id;
-      return lyrics
-      lyric = lyrics
-    
-  });
   try{
-    //var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
+    var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
   } catch (err) {
     
     console.log(err)
@@ -35,7 +26,7 @@ module.exports.run = async (client, message, args, ops) => {
   }
   
   try {
-    var words = lyric.split(" ");
+    var words = lyrics.split(" ");
   } catch (err) {
     return message.channel.send('No lyrics could be found for that song!')
   }
