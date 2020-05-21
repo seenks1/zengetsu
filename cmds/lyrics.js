@@ -1,9 +1,11 @@
 const solenolyrics = require("solenolyrics");
 const Discord = require("discord.js");
 const Genius = require("genius-lyrics")
+const genius = new Genius.Client('3A2SNZticI1E2Yyd7U1OiZsCQ7v_cz2HZWUnkMisKoYng-zmTpRt6hCJJLqB2SUC')
 
 module.exports.run = async (client, message, args, ops) => {
   
+  let lyric = ''
   let pages = []
   let page = 1;
   
@@ -15,9 +17,14 @@ module.exports.run = async (client, message, args, ops) => {
 
   let queue = fetched.queue;
   let nowPlaying = queue[0];
+  var genius.tracks.search(queue[0].songTitle).then(async asu => {
+      const track = await genius.tracks.get(`${asu[0].id}`);
+      const lyrics = await track.lyrics();
+      const id = track.id;
+      console.log(id, lyrics);
+  });
+  
   try{
-    const song = await Genius.tracks.search(queue[0].songTitle)[0];
-    var lyrics = await song.lyrics();
     //var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
   } catch (err) {
     
