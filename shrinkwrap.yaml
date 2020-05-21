@@ -4,6 +4,7 @@ dependencies:
   discord.js: 12.2.0
   express: 4.17.1
   fs: 0.0.2
+  genius-lyrics: 3.0.0
   minimist: 1.2.5
   node-opus: 0.3.3
   opusscript: 0.0.7
@@ -84,6 +85,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-6ckxMjBBD8URvjB6J3NcnuAn5Pkl7t3TizAg+xdlzzQGSPSmBcXf8KoIH0ua/i+tio+ZRUHEXp0HEmvaR4kt0w==
+  /@types/cheerio/0.22.18:
+    dependencies:
+      '@types/node': 14.0.4
+    dev: false
+    resolution:
+      integrity: sha512-Fq7R3fINAPSdUEhOyjG4iVxgHrOnqDJbY0/BUuiN0pvD/rfmZWekVZnv+vcs8TtpA2XF50uv50LaE4EnpEL/Hw==
   /@types/clone-deep/4.0.1:
     dev: false
     resolution:
@@ -139,6 +146,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-3ySmiBYJPqgjiHA7oEaIo2Rzz0HrOZ7yrNO5HWyaE5q0lQ3BppDZ3N53Miz8bw2I7gh1/zir2MGVZBvpb1zq9g==
+  /@types/node/14.0.4:
+    dev: false
+    resolution:
+      integrity: sha512-k3NqigXWRzQZVBDS5D1U70A5E8Qk4Kh+Ha/x4M8Bt9pF0X05eggfnC9+63Usc9Q928hRUIpIhTQaXsZwZBl4Ew==
   /@types/node/9.6.55:
     dev: false
     resolution:
@@ -1977,6 +1988,14 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-ffjC09amcDWjh3VZdkDngIo7WoluyC5Ag9PAYxZbmQLOLNI8lvPtoKTSCyU54j2gwy5roZh6sSMTfkY2ct7K3g==
+  /genius-lyrics/3.0.0:
+    dependencies:
+      '@types/cheerio': 0.22.18
+      axios: 0.19.2
+      cheerio: 1.0.0-rc.3
+    dev: false
+    resolution:
+      integrity: sha512-B2Um1u6G0rjf5R09ht31zguG7AFn7eFWBoMVxzITz533gnxtWVdIxrvRLFRQJ0em2Oonj7hTeRog0yanzUpqfQ==
   /get-caller-file/1.0.3:
     dev: false
     resolution:
@@ -4476,6 +4495,7 @@ specifiers:
   discord.js: ^12.2.0
   express: ^4.17.1
   fs: ^0.0.2
+  genius-lyrics: ^3.0.0
   minimist: ^1.2.5
   node-opus: ^0.3.3
   opusscript: ^0.0.7

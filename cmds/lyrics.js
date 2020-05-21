@@ -1,6 +1,6 @@
 const solenolyrics = require("solenolyrics");
 const Discord = require("discord.js");
-const genius = new (require("genius-lyrics"))("3A2SNZticI1E2Yyd7U1OiZsCQ7v_cz2HZWUnkMisKoYng-zmTpRt6hCJJLqB2SUC");
+const Genius = require("genius-lyrics")
 
 module.exports.run = async (client, message, args, ops) => {
   
@@ -16,11 +16,12 @@ module.exports.run = async (client, message, args, ops) => {
   let queue = fetched.queue;
   let nowPlaying = queue[0];
   try{
-    const song = await genius.tracks.search(queue[0].songTitle)[0];
+    const song = await Genius.tracks.search(queue[0].songTitle)[0];
     var lyrics = await song.lyrics();
     //var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
   } catch (err) {
     
+    console.log(err)
      message.channel.send('These things seem to be in another language, making me unable to print them. Please contact the bot owner for more info.')
     
   }
