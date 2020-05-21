@@ -42,6 +42,7 @@ module.exports.run = async (client, message, args, ops) => {
       w = 0
     }
   }
+  pages.push(trimmed)
   
   let embed = new Discord.MessageEmbed()
     .setColor(0xFFFF00)
