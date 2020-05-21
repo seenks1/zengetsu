@@ -17,13 +17,14 @@ module.exports.run = async (client, message, args, ops) => {
 
   let queue = fetched.queue;
   let nowPlaying = queue[0];
-  var genius.tracks.search(queue[0].songTitle).then(async asu => {
+  genius.tracks.search(queue[0].songTitle).then(async asu => {
       const track = await genius.tracks.get(`${asu[0].id}`);
       const lyrics = await track.lyrics();
       const id = track.id;
-      console.log(id, lyrics);
+      return lyrics
+      lyric = lyrics
+    
   });
-  
   try{
     //var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
   } catch (err) {
@@ -34,7 +35,7 @@ module.exports.run = async (client, message, args, ops) => {
   }
   
   try {
-    var words = lyrics.split(" ");
+    var words = lyric.split(" ");
   } catch (err) {
     return message.channel.send('No lyrics could be found for that song!')
   }
