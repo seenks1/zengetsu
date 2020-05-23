@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 module.exports.run = async (client, message, args, ops) => {
   let embed = new Discord.MessageEmbed()
     .setColor(0xFFFF00)
-    .setTitle('**Commands**')
+    .setTitle('**Music Commands**')
     .addField('Latency', 'Shows the current ping between you and the server')
     .addField('Uptime', 'Gets the bots current uptime')
     .addField('Loop', 'Loops the current queue of music in the guild')
@@ -17,7 +17,7 @@ module.exports.run = async (client, message, args, ops) => {
     .addField('Remove', 'Removes the song at the specificed queue position')
     .setFooter('Showing the list of currently available cmds')
   
-  message.channel.send(embed)
+  if ( args[0] && args[0].toUpperCase() == 'M' || args[0].toUpperCase() == 'MUSIC') return message.channel.send(embed)
   
 }
 
