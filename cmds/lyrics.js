@@ -16,14 +16,8 @@ module.exports.run = async (client, message, args, ops) => {
 
   let queue = fetched.queue;
   let nowPlaying = queue[0];
-  try{
-    var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
-  } catch (err) {
-    
-    console.log(err)
-     message.channel.send('These things seem to be in another language, making me unable to print them. Please contact the bot owner for more info.')
-    
-  }
+  
+  var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
   
   try {
     var words = lyrics.split(" ");
