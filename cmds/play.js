@@ -4,14 +4,11 @@ const prism = require("prism-media");
 const fs = require("fs");
 const Discord = require('discord.js')
 const YouTube = require("simple-youtube-api");
-const guild = new Discord.Guild()
 const fetch = require('node-fetch');
 //import Soundcloud from 'soundcloud.ts'
 let loop = require("./loop.js");
 
 const { Youtubes, Spotify } = require("you-lister");
-const playlistDebugger =
-  "https://www.youtube.com/playlist?list=PL8H85HKySx23uHki_zJvAuqKZG8CaKdUz";
 const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
 
 module.exports.run = async (client, message, args, ops) => {
