@@ -1,4 +1,6 @@
 module.exports.run = async (client, message, args, ops) => {
+  
+  let skip = require("./dskip.js");
 	
 	function sleep(milliseconds) {
 		var start = new Date().getTime();
@@ -12,6 +14,8 @@ module.exports.run = async (client, message, args, ops) => {
 	let fetched = ops.active.get(message.guild.id);
 	
 	if(!fetched) return message.channel.send('There currently isn\'t any music playing in the guild!');
+  
+  if(skip.skip === true) return message.channel.send('Skipping is currently disabled!')
 	
 	if (message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send('Sorry, you currently aren\'t in my voice channel!');
 	
