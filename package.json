@@ -30,7 +30,8 @@
     "@discordjs/opus": "^0.3.2",
     "solenolyrics": "^5.0.0",
     "soundcloud.ts": "^0.2.3",
-    "genius-lyrics": "^3.0.0"
+    "genius-lyrics": "^3.0.0",
+    "translate": "^1.1.2"
   },
   "devDependencies": {
     "minimist": ">=1.2.2"
