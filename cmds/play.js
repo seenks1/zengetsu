@@ -74,7 +74,6 @@ module.exports.run = async (client, message, args, ops) => {
 
   async function handleVideo(video, msg, voiceChannel, playlist = false) {
     let fetch_Loop = ops.active.get(message.guild.id);
-    console.log(video)
     let info = {
       id: video.id,
       title: video.title,
