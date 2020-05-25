@@ -69,7 +69,7 @@ client.on("guildMemberAdd", function(message){
 	let guild = message.guild;
 	let member = message;
 	let membercount = client.users.size;
-	member.roles.add('683170055579893772');
+  if(!message.author.bot)	member.roles.add('683170055579893772');
 	
 	const embed = new Discord.MessageEmbed()
 		.setColor(0xffffff)
