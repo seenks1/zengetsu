@@ -13,9 +13,9 @@ module.exports.run = async function (client, message, args, ops) {
   if (!await keyv.get(message.author.id)) await keyv.set(message.author.id, 'Empty');
 
 	let favorites = await keyv.get(message.author.id)
-  if (fetched.queue[0].s)
+  if (favorites.includes(fetched.queue[0].songTitle)) return message.channel.send('❌ This song is already favorited!')
   keyv.set(message.author.id,  await keyv.get(message.author.id) + '\n' + fetched.queue[0].songTitle)
-  message.channel.send(`Successfully added **${fetched.queue[0].songTitle}** to your favorites!`)
+  message.channel.send(`⭐ Successfully added **${fetched.queue[0].songTitle}** to your favorites! ⭐`)
   
 }
 
