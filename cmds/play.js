@@ -14,10 +14,7 @@ const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
 module.exports.run = async (client, message, args, ops) => {
   const server = client.guilds.cache.get('666058424731041801')
   const load = server.emojis.cache.last()
-  if (!message.member.voice.channel)
-    return message.channel.send(
-      "You are not currently connected to a voice channel!"
-    );
+  if (!message.member.voice.channel) return message.channel.send("You are not currently connected to a voice channel!");
   let voiceChannel = message.member.voice.channel;
 
   if (!args[0])
