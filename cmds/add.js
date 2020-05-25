@@ -8,14 +8,17 @@ module.exports.run = async function (client, message, args, ops) {
 	let fetched = ops.active.get(message.guild.id);
 	
 	if(!fetched) return message.channel.send('There currently isn\'t any music playing in the guild!');  
+  
   keyv.on('error', err => console.error('Keyv connection error:', err));
   if (!await keyv.get(message.author.id)) await keyv.set(message.author.id, 'Empty');
 
-	// bar
 	let favorites = await keyv.get(message.author.id)
+  if (fetched.queue[0].s)
+  keyv.set(message.author.id,  await keyv.get(message.author.id) + '\n' + fetched.queue[0].songTitle)
+  message.channel.send(`Successfully added **${fetched.queue[0].songTitle}** to your favorites!`)
   
 }
 
 module.exports.help = {
-  name: 'favorites'
+  name: 'add'
 }
