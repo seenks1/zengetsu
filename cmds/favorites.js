@@ -4,7 +4,11 @@ const keyv = new Keyv('sqlite://data/favorites.sqlite');
 
 module.exports.run = async function (client, message, args, ops) {
   keyv.on('error', err => console.error('Keyv connection error:', err));
-  if (!await keyv.get(message.author.id)) await keyv.set(message.author.id, '');
+  if (!await keyv.get('favorite1' + message.author.id)) {
+    for (var i = 1; i < 5; i++) {
+      await keyv.set(`favorite${i}` + message.author.id, '')
+    }
+  }
 
   if (args[0]) {
     if (args[0].toUpperCase() === 'CLEAR') {
@@ -15,7 +19,7 @@ module.exports.run = async function (client, message, args, ops) {
 
 	// bar
 	let favorites = await keyv.get(message.author.id)
-  if (favorites === '') return message.channel.send('Your favorites list is currently empty! Consider adding some songs.')
+  if ('favorite1' + message.author.id === '') return message.channel.send('Your favorites list is currently empty! Consider adding some songs.')
   
   let embed = new Discord.MessageEmbed()
     .setColor(0xffff00)

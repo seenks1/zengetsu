@@ -10,11 +10,17 @@ module.exports.run = async function (client, message, args, ops) {
 	if(!fetched) return message.channel.send('There currently isn\'t any music playing in the guild!');  
   
   keyv.on('error', err => console.error('Keyv connection error:', err));
-  if (!await keyv.get(message.author.id)) await keyv.set(message.author.id, '');
+  if (!await keyv.get('favorite1' + message.author.id)) {
+    for (var i = 1; i < 5; i++) {
+      await keyv.set(`favorite${i}` + message.author.id, '')
+    }
+  }
 
-	let favorites = await keyv.get(message.author.id)
-  if (favorites.includes(fetched.queue[0].songTitle)) return message.channel.send('❌ This song is already favorited!')
-  keyv.set(message.author.id,  await keyv.get(message.author.id) + '\n\n' + `${fetched.queue[0].songTitle} [[Click Here]](${fetched.queue[0].url})`)
+  for (var i = 1; i < 5; i++) {
+    let favorites = await keyv.get(`favorite{i}` + message.author.id)
+    if (favorites.includes(fetched.queue[0].songTitle)) return message.channel.send('❌ This song is already favorited!')
+    keyv.set(message.author.id, `${fetched.queue[0].songTitle} [[Click Here]](${fetched.queue[0].url})`)
+  }
   message.channel.send(`⭐ Successfully added **${fetched.queue[0].songTitle}** to your favorites! ⭐`)
   
 }

@@ -17,7 +17,7 @@ module.exports.run = async (client, message, args, ops) => {
     .addField('Play', 'Play music in the guild. Currently supports **Youtube** and **Spotify**\nUsage: `z!play`')
     .addField('Queue', 'Displays the current working music queue\nUsage: `z!queue`')
     .addField('Resume', 'Resumes the music in the guild\nUsage: `z!resume`')
-    .addField('Skip', 'Vote skips the current song playing in the guild\nUsage: z!skip')
+    .addField('Skip', 'Vote skips the current song playing in the guild\nUsage: `z!skip`')
     .addField('Volume', 'Changes the volume of the song currently playing in the guild\nUsage: `z!volume`')
     .addField('Remove', 'Removes the song at the specificed queue position\nUsage: `z!remove`')
     .setFooter('Showing the list of currently available cmds')
