@@ -29,7 +29,7 @@ module.exports.run = async function (client, message, args, ops) {
     
     if (await keyv.get(`favorite${i}${message.author.id}`) === '') {
       
-      keyv.set(`favorite${i}${message.author.id}`, `${fetched.queue[0].songTitle} [[Click Here]](${fetched.queue[0].url})`)
+      keyv.set(`favorite${i}${message.author.id}`, `${i}. **${fetched.queue[0].songTitle}** [[Click Here]](${fetched.queue[0].url})\n\n`)
       
       return message.channel.send(`⭐ Successfully added **${fetched.queue[0].songTitle}** to your favorites! ⭐`)
       
@@ -37,7 +37,7 @@ module.exports.run = async function (client, message, args, ops) {
       
       for (var t = 1; t < 6; t++) {
         if (await keyv.get(`favorite${t + 1}${message.author.id}`) === '') {
-          keyv.set(`favorite${t + 1}${message.author.id}`, `${fetched.queue[0].songTitle} [[Click Here]](${fetched.queue[0].url})`)
+          keyv.set(`favorite${t + 1}${message.author.id}`, ` ${t + 1}. **${fetched.queue[0].songTitle}** [[Click Here]](${fetched.queue[0].url})\n\n`)
           return message.channel.send(`⭐ Successfully added **${fetched.queue[0].songTitle}** to your favorites! ⭐`)
       } else {
         undefined
