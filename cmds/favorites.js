@@ -25,7 +25,7 @@ module.exports.run = async function (client, message, args, ops) {
     let favorite = await keyv.get(`favorite${i}${message.author.id}`)
     favorites += favorite
   }
-  if (`favorite1${message.author.id}` === '') return message.channel.send('Your favorites list is currently empty! Consider adding some songs.')
+  if (await keyv.get(`favorite1${message.author.id}`) === '') return message.channel.send('Your favorites list is currently empty! Consider adding some songs.')
   
   let embed = new Discord.MessageEmbed()
     .setColor(0xffff00)
