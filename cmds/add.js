@@ -20,17 +20,28 @@ module.exports.run = async function (client, message, args, ops) {
   for (var i = 1; i < 6; i++) {
     let favorites = await keyv.get(`favorite${i}${message.author.id}`)
     
-    if (favorites.includes(fetched.queue[0].songTitle)) return message.channel.send('❌ This song is already favorited!')
+    for (var i = 1; i < 6; i++) {
+      let favoritesCheck = await keyv.get(`favorite${i}${message.author.id}`)
+      if (favoritesCheck.includes(fetched.queue[0].songTitle)) return message.channel.send('❌ This song is already favorited!')
+    }
     if (await keyv.get(`favorite${i}${message.author.id}`) === '') {
-      keyv.set(`favorite${i}${message.author.id}`, `${fetched.queue[0].songTitle} [[Click Here]](${fetched.queue[0].url})`) 
+      
+      keyv.set(`favorite${i}${message.author.id}`, `${fetched.queue[0].songTitle} [[Click Here]](${fetched.queue[0].url})`)
+      
+      return message.channel.send(`⭐ Successfully added **${fetched.queue[0].songTitle}** to your favorites! ⭐`)
+      
     } else {
       
-      if (await keyv.get(`favorite${i + 1}${message.author.id}`) === '') {
-        keyv.set(`favorite${i + 1}${message.author.id}`, `${fetched.queue[0].songTitle} [[Click Here]](${fetched.queue[0].url})`) 
+      for (var i = 1; i < 6; i++) {
+        if (await keyv.get(`favorite${i + 1}${message.author.id}`) === '') {
+          keyv.set(`favorite${i + 1}${message.author.id}`, `${fetched.queue[0].songTitle} [[Click Here]](${fetched.queue[0].url})`)
+          return message.channel.send(`⭐ Successfully added **${fetched.queue[0].songTitle}** to your favorites! ⭐`)
+      } else {
+        undefined
+      }
         
       }
     }
-    return message.channel.send(`⭐ Successfully added **${fetched.queue[0].songTitle}** to your favorites! ⭐`)
     
     if (i == 5) {
       if (favorites !== '') return message.channel.send('Your favorites list is currently full!')
