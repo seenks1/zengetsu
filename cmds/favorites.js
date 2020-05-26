@@ -23,7 +23,7 @@ module.exports.run = async function (client, message, args, ops) {
 	let favorites = ''
   for (var i = 1; i < 5; i++) {
     let favorite = await keyv.get(`favorite${i}${message.author.id}`)
-    favorites += favorite
+    favorites += (favorite + '\n\n')
   }
   if (await keyv.get(`favorite1${message.author.id}`) === '') return message.channel.send('Your favorites list is currently empty! Consider adding some songs.')
   
