@@ -21,7 +21,7 @@ module.exports.run = async function (client, message, args, ops) {
 
 	// bar
 	let favorites = ''
-  for (var i = 1; i < 5; i++) {
+  for (var i = 1; i < 6; i++) {
     let favorite = await keyv.get(`favorite${i}${message.author.id}`)
     favorites += favorite
   }
