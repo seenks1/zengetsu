@@ -17,10 +17,15 @@ module.exports.run = async function (client, message, args, ops) {
     }
   }
 
-  for (var i = 0; i < 5; i++) {
+  for (var i = 1; i < 5; i++) {
     let favorites = await keyv.get(`favorite${i}${message.author.id}`)
-    console.log(favorites)
     if (favorites.includes(fetched.queue[0].songTitle)) return message.channel.send('❌ This song is already favorited!')
+    if (favorites !== '') {
+      
+    }
+    if (i == 5) {
+      if (favorites !== '') return message.channel.send('Your favorites list is currently full!')
+    }
     keyv.set(`favorite${i}${message.author.id}`, `${fetched.queue[0].songTitle} [[Click Here]](${fetched.queue[0].url})`)
   }
   message.channel.send(`⭐ Successfully added **${fetched.queue[0].songTitle}** to your favorites! ⭐`)

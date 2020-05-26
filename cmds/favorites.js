@@ -12,7 +12,9 @@ module.exports.run = async function (client, message, args, ops) {
 
   if (args[0]) {
     if (args[0].toUpperCase() === 'CLEAR') {
-      keyv.set(message.author.id, '')
+      for (var i = 1; i < 5; i++) {
+        keyv.set(`favorite${i}${message.author.id}`, '')
+      }
       return message.channel.send('🗑️ Successfully cleared your favorites list! 🗑️')
     }    
   }
