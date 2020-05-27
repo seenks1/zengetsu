@@ -2,6 +2,7 @@ const solenolyrics = require("solenolyrics");
 const Discord = require("discord.js");
 const Genius = require("genius-lyrics")
 //const genius = new Genius.Client('3A2SNZticI1E2Yyd7U1OiZsCQ7v_cz2HZWUnkMisKoYng-zmTpRt6hCJJLqB2SUC')
+const genius = new (require("genius-lyrics")).Client("your-token-here");
 
 module.exports.run = async (client, message, args, ops) => {
   

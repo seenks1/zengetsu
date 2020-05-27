@@ -29,7 +29,7 @@
     "opusscript": "^0.0.7",
     "@discordjs/opus": "^0.3.2",
     "solenolyrics": "^5.0.0",
-    "soundcloud.ts": "^0.2.3",
+    "soundcloud.ts": "^0.2.5",
     "genius-lyrics": "^3.0.0",
     "translate": "^1.1.2",
     "keyv": "^4.0.1",
