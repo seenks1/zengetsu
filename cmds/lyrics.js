@@ -19,6 +19,7 @@ module.exports.run = async (client, message, args, ops) => {
           return lyrics
           //console.log(lyrics);
      } catch(e) {
+          //message.channel.send('Foreign Characters cannot be printed!')
           console.log(e);
      }
   }
