@@ -5,11 +5,19 @@ const genius = new Genius.Client('3A2SNZticI1E2Yyd7U1OiZsCQ7v_cz2HZWUnkMisKoYng-
 
 module.exports.run = async (client, message, args, ops) => {
   
+  let fetched = ops.active.get(message.guild.id);
+  if (!fetched) return message.channel.send("There currently isn't any music playing in this guild!");
+
+  let queue = fetched.queue;
+  let nowPlaying = queue[0];
+  
   async function lyrics() {
      try {
-          const song = await genius.tracks.search(queue[0].songTitle)[0]; //even tho limit is 1, it will be inside an array
-          const lyrics = await song.lyrics();
-          console.log(lyrics);
+          let results = await genius.tracks.search(nowPlaying.songTitle); //even tho limit is 1, it will be inside an array
+          const song = results[0];
+          const lyrics = await song.lyrics()
+          return lyrics
+          //console.log(lyrics);
      } catch(e) {
           console.log(e);
      }
@@ -18,14 +26,8 @@ module.exports.run = async (client, message, args, ops) => {
   let pages = []
   let page = 1;
   
-  let fetched = ops.active.get(message.guild.id);
-  if (!fetched) return message.channel.send("There currently isn't any music playing in this guild!");
-
-  let queue = fetched.queue;
-  let nowPlaying = queue[0];
-  
-  var lyrics = lyrics();
-  //var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
+  var lyrics = await lyrics();
+  //var lyrics1 = await solenolyrics.requestLyricsFor(queue[0].songTitle);
   
   try {
     var words = lyrics.split(" ");
