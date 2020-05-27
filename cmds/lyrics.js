@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args, ops) => {
   
   async function lyrics() {
      try {
-          const song = await Genius.tracks.search(args[0], { limit: 1 })[0]; //even tho limit is 1, it will be inside an array
+          const song = await genius.tracks.search(queue[0].songTitle)[0]; //even tho limit is 1, it will be inside an array
           const lyrics = await song.lyrics();
           console.log(lyrics);
      } catch(e) {
