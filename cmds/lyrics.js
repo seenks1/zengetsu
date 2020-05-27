@@ -1,10 +1,19 @@
 const solenolyrics = require("solenolyrics");
 const Discord = require("discord.js");
 const Genius = require("genius-lyrics")
-//const genius = new Genius.Client('3A2SNZticI1E2Yyd7U1OiZsCQ7v_cz2HZWUnkMisKoYng-zmTpRt6hCJJLqB2SUC')
-const genius = new (require("genius-lyrics")).Client("your-token-here");
+const genius = new Genius.Client('3A2SNZticI1E2Yyd7U1OiZsCQ7v_cz2HZWUnkMisKoYng-zmTpRt6hCJJLqB2SUC')
 
 module.exports.run = async (client, message, args, ops) => {
+  
+  async function lyrics() {
+     try {
+          const song = await Genius.tracks.search(args[0], { limit: 1 })[0]; //even tho limit is 1, it will be inside an array
+          const lyrics = await song.lyrics();
+          console.log(lyrics);
+     } catch(e) {
+          console.log(e);
+     }
+  }
   
   let pages = []
   let page = 1;
@@ -15,7 +24,8 @@ module.exports.run = async (client, message, args, ops) => {
   let queue = fetched.queue;
   let nowPlaying = queue[0];
   
-  var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
+  var lyrics = lyrics();
+  //var lyrics = await solenolyrics.requestLyricsFor(queue[0].songTitle);
   
   try {
     var words = lyrics.split(" ");
