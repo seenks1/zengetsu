@@ -31,8 +31,12 @@ fs.readdir("./cmds/", (err, files) => {
 });
 
 client.on("ready",  async () => {
+  
+      setInterval(() => {
+        dbl.postStats(client.guilds.size, client.shards.Id, client.shards.total);
+    }, 1800000);
 	
-		console.log(`Bot is ready! ${client.user.username}`);
+		console.log(`Bot is ready!`);
 		
 		try {
 			let link = await client.generateInvite(["MANAGE_MESSAGES", 'EMBED_LINKS']);
@@ -59,6 +63,18 @@ client.on("ready",  async () => {
     //console.log(`Someone deleted a message! It had content: **"${message.content}"**`);
   }
 });
+
+const DBL = require("dblapi.js");
+const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NTc3OTI0NDE3NzE2MjI0MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTkwNjc2MzIxfQ.XO3u04U_eprLnTk4O56gd2p4YeF1DemZFRZ7_KBM6XU', client);
+
+// Optional events
+dbl.on('posted', () => {
+  console.log('Server count posted!');
+})
+
+dbl.on('error', e => {
+ console.log(`Oops! ${e}`);
+})
 
 
 //client.on('guildMemberRemove',(member) => {
