@@ -3,6 +3,10 @@ const Discord = require('discord.js')
 
 module.exports.run = (client, message, args, ops) => {
 	let mid = ''
+  
+  const server = client.guilds.cache.get('666058424731041801')
+  const load = server.emojis.cache.last()
+  
 	search(args.join(' '), function(err, res) {
 		if (err) return console.log(err)
 		
@@ -21,7 +25,7 @@ module.exports.run = (client, message, args, ops) => {
 			.setTitle('Results')
 			.setDescription(resp)
 	
-		message.channel.send(embed).then(msg => mid = msg)
+		message.channel.send(` ${load} Loading...`).then((sentMessage) => sentMessage.edit(embed).then(msg => mid = msg))
 		
 		const filter = m => !isNaN(m.content) && m.content < videos.length + 1 && m.content > 0 && m.author.id === message.author.id;
 		
