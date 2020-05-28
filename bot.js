@@ -116,4 +116,4 @@ client.on('message', async message => {
 }
 });
 
-client.login("NjQ1Nzc5MjQ0MTc3MTYyMjQw.XdXMZg.sOKqpUnnewXbALJkCHx0-sO2b9o");
+client.login(process.env.DISCORD_TOKEN);
