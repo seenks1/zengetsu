@@ -33,7 +33,7 @@ fs.readdir("./cmds/", (err, files) => {
 client.on("ready",  async () => {
   
       setInterval(() => {
-        dbl.postStats(client.guilds.size, client.shards.Id, client.shards.total);
+        dbl.postStats(client.guilds.size);
     }, 1800000);
 	
 		console.log(`Bot is ready!`);
