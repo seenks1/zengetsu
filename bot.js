@@ -76,11 +76,6 @@ dbl.on('error', e => {
  console.log(`Oops! ${e}`);
 })
 
-
-//client.on('guildMemberRemove',(member) => {
-    //client.channels.get("name", "welcome").send(`**${member.username}** has just left server.. Bye Bye`);
-//});
-
 client.on("guildMemberAdd", function(message){
 	let guild = message.guild;
 	let member = message;
