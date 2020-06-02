@@ -8,6 +8,9 @@ const fetch = require('node-fetch');
 //import Soundcloud from 'soundcloud.ts'
 let loop = require("./loop.js");
 
+const Keyv = require('keyv');
+const keyv = new Keyv('sqlite://data/economy.sqlite');
+
 const { Youtubes, Spotify } = require("you-lister");
 const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
 
@@ -103,6 +106,16 @@ module.exports.run = async (client, message, args, ops) => {
     } else {
       if (playlist) return undefined;
       else message.channel.send(` ${load} Loading...`).then((sentMessage) => sentMessage.edit(`Added To Queue: **${info.title}** | Request By: ${data.queue[data.queue.length - 1].requester} `)).then(msg => {msg.delete({timeout: 10000});});
+      if (await keyv.get(`plays${message.author.id}`) === undefined) {
+        keyv.set(`plays${message.author.id}`, 0)
+        keyv.set(`coins${message.author.id}, 0)
+      }
+      let coinCount = await keyv.get(`coins${message.author.id}`)
+      let playCount = await keyv.get(`plays${message.author.id}`)
+      if (playCount === 2) {
+        message.channel.send('💰 You have been awarded 1 zen coin!')
+        keyv.set(`plays${message.author.id}`, 0)
+      }
     }
 
     ops.active.set(message.guild.id, data);
