@@ -36,6 +36,7 @@
     "@keyv/sqlite": "^2.0.2",
     "dblapi.js": "^2.4.0",
     "request": "^2.81.0"
+    "ffmpeg-binaries"
   },
   "devDependencies": {
     "minimist": ">=1.2.2"
