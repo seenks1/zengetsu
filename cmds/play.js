@@ -113,6 +113,10 @@ module.exports.run = async (client, message, args, ops) => {
       
       let coinCount = await keyv.get(`coins${message.author.id}`)
       let playCount = await keyv.get(`plays${message.author.id}`)
+      
+      console.log(playCount)
+      console.log(coinCount)
+      
       await keyv.set(`plays${message.author.id}`, playCount+1)
       if (playCount === 2) {
         message.channel.send('💰 You have been awarded 1 zen coin!')
