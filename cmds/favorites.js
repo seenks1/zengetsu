@@ -13,10 +13,10 @@ module.exports.run = async function (client, message, args, ops) {
   if (args[0]) {
     if (args[0].toUpperCase() === 'CLEAR') {
       for (var i = 1; i < 6; i++) {
-        keyv.set(`favorite${i}${message.author.id}`, '')
+        await keyv.set(`favorite${i}${message.author.id}`, '')
       }
       return message.channel.send('🗑️ Successfully cleared your favorites list! 🗑️')
-    }    
+    }
   }
 
 	// bar
@@ -26,12 +26,12 @@ module.exports.run = async function (client, message, args, ops) {
     favorites += favorite
   }
   if (await keyv.get(`favorite1${message.author.id}`) === '') return message.channel.send('Your favorites list is currently empty! Consider adding some songs.')
-  
+
   let embed = new Discord.MessageEmbed()
     .setColor(0xffff00)
     .setTitle('Favorites List')
     .setDescription(favorites)
-  
+
   message.channel.send(embed)
 }
 
