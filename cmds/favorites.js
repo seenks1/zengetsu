@@ -15,7 +15,7 @@ module.exports.run = async function (client, message, args, ops) {
       for (var i = 1; i < 6; i++) {
         await keyv.set(`favorite${i}${message.author.id}`, '')
       }
-      return message.channel.send('🗑️ Successfully cleared your favorites list! 🗑️')
+      return message.channel.send('🗑️ Successfully cleared your **favorites** list! 🗑️')
     }
   }
 
