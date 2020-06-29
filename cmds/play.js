@@ -15,8 +15,6 @@ const { Youtubes, Spotify } = require("you-lister");
 const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
 
 module.exports.run = async (client, message, args, ops) => {
-  const server = client.guilds.cache.get('666058424731041801')
-  const load = server.emojis.cache.last()
   if (!message.member.voice.channel) return message.channel.send("You are not currently connected to a voice channel!");
   let voiceChannel = message.member.voice.channel;
 
@@ -104,7 +102,7 @@ module.exports.run = async (client, message, args, ops) => {
       play(client, ops, data);
     } else {
       if (playlist) return undefined;
-      else message.channel.send(` ${load} Loading...`).then((sentMessage) => sentMessage.edit(`Added To Queue: **${info.title}** | Request By: ${data.queue[data.queue.length - 1].requester} `)).then(msg => {msg.delete({timeout: 10000});});
+      else message.channel.send(`Loading...`).then((sentMessage) => sentMessage.edit(`Added To Queue: **${info.title}** | Request By: ${data.queue[data.queue.length - 1].requester} `)).then(msg => {msg.delete({timeout: 10000});});
       if (await keyv.get(`plays${message.author.id}`) === undefined) {
         await keyv.set(`plays${message.author.id}`, 0)
         await keyv.set(`coins${message.author.id}`, 0)
