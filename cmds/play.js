@@ -60,7 +60,7 @@ module.exports.run = async (client, message, args, ops) => {
     }
 
     spotifyFTest();
-    
+
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
       return message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
       //const soundcloud = new Soundcloud()
@@ -71,7 +71,7 @@ module.exports.run = async (client, message, args, ops) => {
      let commandFile = require(`./search.js`);
      return commandFile.run(client, message, args, ops);
   }
-  
+
   let video = await youtube.getVideo(args[0]);
   return handleVideo(video, message, voiceChannel);
 
@@ -86,8 +86,7 @@ module.exports.run = async (client, message, args, ops) => {
     };
     let data = ops.active.get(message.guild.id) || {};
     const queue = data.queue;
-    if (!data.connection)
-      data.connection = await message.member.voice.channel.join(); //If there isn't a connection create one
+    if (!data.connection) data.connection = await message.member.voice.channel.join(); //If there isn't a connection create one
     if (!data.queue) data.queue = [];
     data.guildID = message.guild.id;
 
@@ -103,20 +102,20 @@ module.exports.run = async (client, message, args, ops) => {
 
     if (!data.dispatcher) {
       play(client, ops, data);
-    } else {
+    } else {w
       if (playlist) return undefined;
       else message.channel.send(` ${load} Loading...`).then((sentMessage) => sentMessage.edit(`Added To Queue: **${info.title}** | Request By: ${data.queue[data.queue.length - 1].requester} `)).then(msg => {msg.delete({timeout: 10000});});
       if (await keyv.get(`plays${message.author.id}`) === undefined) {
         await keyv.set(`plays${message.author.id}`, 0)
         await keyv.set(`coins${message.author.id}`, 0)
       }
-      
+
       let coinCount = await keyv.get(`coins${message.author.id}`)
       let playCount = await keyv.get(`plays${message.author.id}`)
-      
+
       console.log(playCount)
       console.log(coinCount)
-      
+
       await keyv.set(`plays${message.author.id}`, playCount+1)
       if (playCount === 2) {
         message.channel.send('💰 You have been awarded 1 zen coin!')
