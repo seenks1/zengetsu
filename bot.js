@@ -1,4 +1,3 @@
-const discordBotkit = require("botkit-discord");
 const fs = require('fs')
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -20,9 +19,9 @@ fs.readdir("./cmds/", (err, files) => {
 		 console.log('Not able to load any commands!');
 		 return;
 	 }
-	 
+
 	 console.log(`Loading ${jsfiles.length} commands!`);
-	 
+
 	 jsfiles.forEach((f,i) => {
 		let props = require(`./cmds/${f}`);
 		console.log(`${i + 1}: ${f} loaded!`);
@@ -31,28 +30,28 @@ fs.readdir("./cmds/", (err, files) => {
 });
 
 client.on("ready",  async () => {
-  
+
       setInterval(() => {
         dbl.postStats(client.guilds.size);
     }, 1800000);
-	
+
 		console.log(`Bot is ready!`);
-		
+
 		try {
 			let link = await client.generateInvite(["MANAGE_MESSAGES", 'EMBED_LINKS']);
 			console.log(link);
 		} catch(e) {
 			console.log(e.stack);
 		}
-		
+
 		setInterval(function() {
-			
+
 			let status = statuses[Math.floor(Math.random()*statuses.length)];
-			
+
 			client.user.setPresence({ game: { name: status }, status: 'online'});
-			
+
 			client.user.setPresence({ activity: { name: status }, status: 'online' });
-			
+
 		}, 3000)
 });
 
@@ -81,8 +80,8 @@ client.on("guildMemberAdd", function(message){
 	let member = message;
 	let membercount = client.users.size;
   //member.roles.add('683170055579893772');
-		
-		
+
+
 });
 
 client.on('message', async message => {
@@ -93,16 +92,16 @@ client.on('message', async message => {
 		//message.delete()
 		//message.channel.send('Silence Mortal');
 	//}
-	
+
 	if (message.author.bot) return;
-  
+
   try {
 	let messageArray = message.content.split(/\s+/g);
 	let ops = {
 		ownerID: ownerID,
     active: active
 	}
-		
+
 	let command = messageArray[0]
 	let args = messageArray.slice(1)
 	const mess = message.content.toLowerCase();
