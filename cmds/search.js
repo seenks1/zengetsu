@@ -22,11 +22,13 @@ module.exports.run = (client, message, args, ops) => {
 			.setTitle('Results')
 			.setDescription(resp)
 
-		message.channel.send(embed)
+		message.channel.send(`Loading...`).then((sentMessage) => sentMessage.edit(embed).then(msg => mid = msg))
 
 		const filter = m => !isNaN(m.content) && m.content < videos.length + 1 && m.content > 0 && m.author.id === message.author.id;
 
 		const collector = message.channel.createMessageCollector(filter);
+
+		console.log('Collected was created')
 
 
 		collector.videos = videos;
