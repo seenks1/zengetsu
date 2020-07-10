@@ -22,7 +22,7 @@ module.exports.run = async (client, message, args, ops) => {
 			.setTitle('Results')
 			.setDescription(resp)
 
-		message.channel.send(`Loading...`).then((sentMessage) => sentMessage.edit(embed).then(msg => mid = msg))
+		message.channel.send(embed)
 
 		const filter = m => !isNaN(m.content) && m.content < videos.length + 1 && m.content > 0 && m.author.id === message.author.id;
 
