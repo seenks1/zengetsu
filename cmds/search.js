@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 module.exports.run = async (client, message, args, ops) => {
 	let mid = ''
 
-	search(args.join(' '), async function(err, res) {
+	search(args.join(' '), function(err, res) {
 		if (err) return console.log(err)
 
 		let videos = res.videos.slice(0,10);
