@@ -1,7 +1,7 @@
 const search = require('yt-search');
 const Discord = require('discord.js')
 
-module.exports.run = async (client, message, args, ops) => {
+module.exports.run = (client, message, args, ops) => {
 	let mid = ''
 
 	search(args.join(' '), function(err, res) {
