@@ -12,7 +12,7 @@ module.exports.run = async (client, message, args, ops) => {
 		let resp = '';
 		for (var i in videos) {
 			//resp += `**[${parseInt(i)+1}]:** \`${videos[i].title} (${videos[i].duration.timestamp})\`\n`;
-			await resp += `**[${parseInt(i)+1}]:** ${videos[i].title} **(${videos[i].duration.timestamp})**\n\n`;
+			resp += `**[${parseInt(i)+1}]:** ${videos[i].title} **(${videos[i].duration.timestamp})**\n\n`;
 		}
 
 		resp += `\n**Choose a number between** \`1-${videos.length}\``;
