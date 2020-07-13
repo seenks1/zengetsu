@@ -48,7 +48,8 @@ module.exports.run = async (client, message, args, ops) => {
     async function spotifyFTest() {
       let aux = await spotifyTest.scrap();
       for (const video of Object.values(aux)) {
-        const video3 = await youtube.searchVideos(video.name, 1);
+        const video3 = await youtube.getVideoByID(video.id);
+        console.log(video3)
         await handleVideo(video3, message, voiceChannel, true);
       }
 
