@@ -11,7 +11,7 @@ let loop = require("./loop.js");
 const Keyv = require('keyv');
 const keyv = new Keyv('sqlite://data/economy.sqlite');
 
-const { Youtubes, Spotify } = require("you-lister");
+const Spotify= require("you-lister");
 const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
 
 module.exports.run = async (client, message, args, ops) => {
@@ -36,16 +36,12 @@ module.exports.run = async (client, message, args, ops) => {
     return message.channel.send(
       ` Playlist: **${playlist.title}** has been added to the queue.`
     );
-  } else if (
-    !validate &&
-    args[0].includes("https://open.spotify.com/playlist/")
-  ) {
+  } else if (!validate && args[0].includes("https://open.spotify.com/playlist/")) {
     let spotifyTest = new Spotify({
       url: args[0],
       details: ["id", "name", "url", "originalName"]
     });
 
-    async function spotifyFTest() {
       let aux = await spotifyTest.scrap();
       for (const video of Object.values(aux)) {
         const video3 = await youtube.getVideoByID(video.id);
@@ -53,12 +49,7 @@ module.exports.run = async (client, message, args, ops) => {
         await handleVideo(video3, message, voiceChannel, true);
       }
 
-      return message.channel.send(
-        `**Spotify playlist has been added to the queue.**`
-      );
-    }
-
-    spotifyFTest();
+      return message.channel.send(`**Spotify playlist has been added to the queue.**`);
 
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
       return message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
