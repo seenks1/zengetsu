@@ -43,6 +43,7 @@ module.exports.run = async (client, message, args, ops) => {
     });
 
       let aux = await spotifyTest.scrap();
+      console.log(aux)
       for (const video of Object.values(aux)) {
         const video3 = await youtube.getVideoByID(video.id);
         console.log(video3)
