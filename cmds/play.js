@@ -11,7 +11,7 @@ let loop = require("./loop.js");
 const Keyv = require('keyv');
 const keyv = new Keyv('sqlite://data/economy.sqlite');
 
-const Spotify= require("you-lister");
+const { Spotify } = require("you-lister");
 const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
 
 module.exports.run = async (client, message, args, ops) => {
