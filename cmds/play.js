@@ -71,8 +71,12 @@ module.exports.run = async (client, message, args, ops) => {
      return commandFile.run(client, message, args, ops);
   }
 
-  let video = await youtube.getVideo(args[0]);
-  return handleVideo(video, message, voiceChannel);
+  if (validate) {
+
+    let video = await youtube.getVideo(args[0]);
+    return handleVideo(video, message, voiceChannel);
+
+  }
 
   async function handleVideo(video, msg, voiceChannel, playlist = false) {
     let fetch_Loop = ops.active.get(message.guild.id);
