@@ -168,5 +168,6 @@ function finish(client, ops, dispatcher) {
 }
 
 module.exports.help = {
-  name: "play"
+  name: "play",
+  aliases: ["p", "music"]
 };
