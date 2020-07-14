@@ -8,10 +8,7 @@ const fetch = require('node-fetch');
 //import Soundcloud from 'soundcloud.ts'
 let loop = require("./loop.js");
 
-const Keyv = require('keyv');
-const keyv = new Keyv('sqlite://data/economy.sqlite');
-
-const { Spotify } = require("you-lister");
+const { getData, getPreview } = require("spotify-url-info");
 const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
 
 module.exports.run = async (client, message, args, ops) => {
@@ -28,6 +25,7 @@ module.exports.run = async (client, message, args, ops) => {
   if (!validate && args[0].match(/^.*(youtu.be\/|list=)([^#\&\?]*).*/)) {
     const playlist = await youtube.getPlaylist(args[0]);
     const videos = await playlist.getVideos();
+    console.log(videos)
     for (const video of Object.values(videos)) {
       const video2 = await youtube.getVideoByID(video.id);
       await handleVideo(video2, message, voiceChannel, true);
@@ -36,27 +34,34 @@ module.exports.run = async (client, message, args, ops) => {
     return message.channel.send(
       ` Playlist: **${playlist.title}** has been added to the queue.`
     );
-  } else if (!validate && args[0].includes("https://open.spotify.com/playlist/")) {
-    let spotifyTest = new Spotify({
-      url: args[0],
-      details: ["id", "name", "url", "originalName"]
-    });
+  } else if (!validate && args[0].includes("https://open.spotify.com/track/")) {
+      try {
 
-      let aux = await spotifyTest.scrap();
-      console.log(aux)
-      for (const video of Object.values(aux)) {
-        const video3 = await youtube.getVideoByID(video.id);
-        console.log(video3)
-        await handleVideo(video3, message, voiceChannel, true);
-      }
-
-      return message.channel.send(`**Spotify playlist has been added to the queue.**`);
+        let spotData = await getPreview(args[0])
+        const YTurl = await youtube.searchVideos((spotData.title + spotData.artist), 1)
+        console.log(YTurl)
+        const video3 = await youtube.getVideoByID(YTurl[0].id)
+        await handleVideo(video3, message, voiceChannel, false)
+    } catch (err) {
+      console.log(err)
+      message.channel.send('Query limit reached. Seemed I messed up somewhere. I hate my life!')
+    }
 
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
       return message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
       //const soundcloud = new Soundcloud()
       //const track = await soundcloud.tracks.get(args[0])
       //console.log(track)
+
+  } else if (!validate && args[0].includes("https://open.spotify.com/playlist")) {
+    let playData = await getData(args[0])
+    for (const video of Object.values(playData.tracks.items)) {
+      const vidData = await getPreview(video.track.external_urls.spotify)
+      console.log(video.track.external_urls.spotify)
+      const URL = await youtube.searchVideos((vidData.title + vidData.artist), 1)
+      const video4 = await youtube.getVideoByID(URL[0].id)
+      await handleVideo(video4, message, voiceChannel, true)
+    }
 
   } else if (!validate) {
      let commandFile = require(`./search.js`);

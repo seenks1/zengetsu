@@ -28,9 +28,10 @@ module.exports.run = async (client, message, args, ops) => {
     .setFooter(`The queue is currently ${queue.length} song(s) long`);
 
   message.channel.send(embed)
-  
+
 }
 
 module.exports.help = {
-  name: "queue"
+  name: "queue",
+  aliases: ['q', 'qe']
 };
