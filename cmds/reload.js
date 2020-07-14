@@ -4,7 +4,7 @@ module.exports.run = async function(client, message, args, ops) {
   const command = message.client.commands.get(commandName) || message.client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(commandName));
 
   if (!command) return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
-  delete require.cache[require.resolve(`./${command.name}.js`)];
+  delete require.cache[require.resolve(`./${command.help.name}.js`)];
 
   try {
 
