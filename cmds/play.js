@@ -23,14 +23,18 @@ module.exports.run = async (client, message, args, ops) => {
   let validate = await ytdl.validateURL(args[0]);
   // /^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/
   if (!validate && args[0].match(/^.*(youtu.be\/|list=)([^#\&\?]*).*/)) {
-    const playlist = await youtube.getPlaylist(args[0]);
-    const videos = await playlist.getVideos();
-    console.log(videos)
-    for (const video of Object.values(videos)) {
-      const video2 = await youtube.getVideoByID(video.id);
-      await handleVideo(video2, message, voiceChannel, true);
-    }
-
+    try {
+      const playlist = await youtube.getPlaylist(args[0]);
+      const videos = await playlist.getVideos();
+      console.log(videos)
+      for (const video of Object.values(videos)) {
+        const video2 = await youtube.getVideoByID(video.id);
+        await handleVideo(video2, message, voiceChannel, true);
+      }
+  } catch (err) {
+    console.log(err.stack)
+    return message.channel.send('An error has occured: ' + err.message)
+  }
     return message.channel.send(
       ` Playlist: **${playlist.title}** has been added to the queue.`
     );
@@ -39,12 +43,16 @@ module.exports.run = async (client, message, args, ops) => {
 
         let spotData = await getPreview(args[0])
         const YTurl = await youtube.searchVideos((spotData.title + spotData.artist), 1)
-        console.log(YTurl)
         const video3 = await youtube.getVideoByID(YTurl[0].id)
         await handleVideo(video3, message, voiceChannel, false)
     } catch (err) {
       console.log(err)
-      message.channel.send('Query limit reached. Seemed I messed up somewhere. I hate my life!')
+      message.channel.send('Seemed I messed up somewhere. I hate my life!')
+      let embed = new Discord.MessageEmbed()
+        .setDescription(err.message)
+        .setFooter('Please contact the bot author if problems continue')
+
+      message.channel.send(embed)
     }
 
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
@@ -57,11 +65,15 @@ module.exports.run = async (client, message, args, ops) => {
     let playData = await getData(args[0])
     for (const video of Object.values(playData.tracks.items)) {
       const vidData = await getPreview(video.track.external_urls.spotify)
-      console.log(video.track.external_urls.spotify)
       const URL = await youtube.searchVideos((vidData.title + vidData.artist), 1)
+
+      if(URL.length <== 0) return message.channel.send(`Not search results came up for: ${vidData.title} - ${vidData.artist}`)
+
       const video4 = await youtube.getVideoByID(URL[0].id)
       await handleVideo(video4, message, voiceChannel, true)
     }
+
+    return message.channel.send('**Spotify Playlist has been added to the queue**')
 
   } else if (!validate) {
      let commandFile = require(`./search.js`);
