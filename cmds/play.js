@@ -67,7 +67,7 @@ module.exports.run = async (client, message, args, ops) => {
       const vidData = await getPreview(video.track.external_urls.spotify)
       const URL = await youtube.searchVideos((vidData.title + vidData.artist), 1)
 
-      if(URL.length <== 0) return message.channel.send(`Not search results came up for: ${vidData.title} - ${vidData.artist}`)
+      if(URL.length <= 0) return message.channel.send(`Not search results came up for: ${vidData.title} - ${vidData.artist}`)
 
       const video4 = await youtube.getVideoByID(URL[0].id)
       await handleVideo(video4, message, voiceChannel, true)
