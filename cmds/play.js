@@ -69,7 +69,7 @@ module.exports.run = async (client, message, args, ops) => {
 
       if(URL.length <= 0) message.channel.send(`Not search results came up for: **${vidData.title} - ${vidData.artist}**`)
 
-      if(!URL.length <= 0) const video4 = await youtube.getVideoByID(URL[0].id)
+      const video4 = await youtube.getVideoByID(URL[0].id)
       await handleVideo(video4, message, voiceChannel, true)
     }
 
