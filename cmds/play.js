@@ -65,7 +65,12 @@ module.exports.run = async (client, message, args, ops) => {
     let playData = await getData(args[0])
     for (const video of Object.values(playData.tracks.items)) {
       try {
-        const vidData = await getPreview(video.track.external_urls.spotify)
+
+        if(args[0].includes("https://open.spotify.com/playlist")) {
+          const vidData = await getPreview(video.track.external_urls.spotify)
+        }
+
+        const vidData = await getPreview(video.external_urls.spotify)
         const URL = await youtube.searchVideos((vidData.title + vidData.artist), 1)
 
         if(URL.length <= 0) message.channel.send(`Not search results came up for: **${vidData.title} - ${vidData.artist}**`)
@@ -77,7 +82,7 @@ module.exports.run = async (client, message, args, ops) => {
       }
     }
 
-    return message.channel.send('**Spotify Playlist has been added to the queue**')
+    return message.channel.send('**Spotify Playlist/Album has been added to the queue**')
 
   } else if (!validate) {
      let commandFile = require(`./search.js`);
