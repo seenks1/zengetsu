@@ -64,13 +64,17 @@ module.exports.run = async (client, message, args, ops) => {
   } else if (!validate && args[0].includes("https://open.spotify.com/playlist")) {
     let playData = await getData(args[0])
     for (const video of Object.values(playData.tracks.items)) {
-      const vidData = await getPreview(video.track.external_urls.spotify)
-      const URL = await youtube.searchVideos((vidData.title + vidData.artist), 1)
+      try {
+        const vidData = await getPreview(video.track.external_urls.spotify)
+        const URL = await youtube.searchVideos((vidData.title + vidData.artist), 1)
 
-      if(URL.length <= 0) message.channel.send(`Not search results came up for: **${vidData.title} - ${vidData.artist}**`)
+        if(URL.length <= 0) message.channel.send(`Not search results came up for: **${vidData.title} - ${vidData.artist}**`)
 
-      const video4 = await youtube.getVideoByID(URL[0].id)
-      await handleVideo(video4, message, voiceChannel, true)
+        const video4 = await youtube.getVideoByID(URL[0].id)
+        await handleVideo(video4, message, voiceChannel, true)
+      } catch (err) {
+        console.log('Fetched an error: ' +err.message)
+      }
     }
 
     return message.channel.send('**Spotify Playlist has been added to the queue**')
