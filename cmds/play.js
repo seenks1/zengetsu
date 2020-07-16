@@ -61,7 +61,7 @@ module.exports.run = async (client, message, args, ops) => {
       //const track = await soundcloud.tracks.get(args[0])
       //console.log(track)
 
-  } else if (!validate && args[0].includes("https://open.spotify.com/playlist")) {
+  } else if (!validate && args[0].includes("https://open.spotify.com/playlist") || args[0].includes('https://open.spotify.com/album/')) {
     let playData = await getData(args[0])
     for (const video of Object.values(playData.tracks.items)) {
       try {
