@@ -4,13 +4,13 @@ const Genius = require("genius-lyrics")
 const genius = new Genius.Client('3A2SNZticI1E2Yyd7U1OiZsCQ7v_cz2HZWUnkMisKoYng-zmTpRt6hCJJLqB2SUC')
 
 module.exports.run = async (client, message, args, ops) => {
-  
+
   let fetched = ops.active.get(message.guild.id);
   if (!fetched) return message.channel.send("There currently isn't any music playing in this guild!");
 
   let queue = fetched.queue;
   let nowPlaying = queue[0];
-  
+
   async function lyrics() {
      try {
           let results = await genius.tracks.search(nowPlaying.songTitle); //even tho limit is 1, it will be inside an array
@@ -23,23 +23,23 @@ module.exports.run = async (client, message, args, ops) => {
           console.log(e);
      }
   }
-  
+
   let pages = []
   let page = 1;
-  
+
   var lyrics = await lyrics();
   //var lyrics1 = await solenolyrics.requestLyricsFor(queue[0].songTitle);
-  
+
   try {
     var words = lyrics.split(" ");
   } catch (err) {
     return message.channel.send('No lyrics could be found for that song!')
   }
   let trimmed = ''
-  
+
   for (var i = 0; i < words.length - 1; i++) {
     words[i] += " ";
-  }  
+  }
   let w = 0
   for (let i = 0; i < words.length; i++) {
     trimmed += words[i]
@@ -51,25 +51,25 @@ module.exports.run = async (client, message, args, ops) => {
     }
   }
   pages.push(trimmed)
-  
+
   let embed = new Discord.MessageEmbed()
     .setColor(0xFFFF00)
     .setTitle(`**Lyrics For: ${queue[0].songTitle}**`)
     .setDescription(pages[page-1])
     .setFooter(`Page ${page} of ${pages.length}`)
-  
+
   message.channel.send(embed).then(msg => {
     msg.react('⬅️').then(r => {
-      
+
       msg.react('➡️')
-      
+
       const backwardsFilter = (reaction, user) => reaction.emoji.name === '⬅️' && user.id === message.author.id;
       const forwardsFilter = (reaction, user) => reaction.emoji.name === '➡️' && user.id === message.author.id;
-      
+
       const backwards = msg.createReactionCollector(backwardsFilter);
-      
+
       const forwards = msg.createReactionCollector(forwardsFilter);
-      
+
       backwards.on('collect', r => {
         if (page === 1) return;
         page--;
@@ -77,19 +77,20 @@ module.exports.run = async (client, message, args, ops) => {
         embed.setFooter(`Page ${page} of ${pages.length}`);
         msg.edit(embed)
       })
-      
+
       forwards.on('collect', r => {
         if (page === pages.length) return;
         page++;
         embed.setDescription(pages[page-1]);
         embed.setFooter(`Page ${page} of ${pages.length}`);
         msg.edit(embed)
-        
+
       })
     })
   })
 };
 
 module.exports.help = {
-  name: "lyrics"
+  name: "lyrics",
+  guildOnly: true
 };

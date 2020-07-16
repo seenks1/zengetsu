@@ -42,5 +42,6 @@ module.exports.run = (client, message, args, ops) => {
 }
 
 module.exports.help = {
-	name: "search"
+	name: "search",
+	guildOnly: true
 }

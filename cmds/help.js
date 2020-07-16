@@ -5,9 +5,9 @@ module.exports.run = async (client, message, args, ops) => {
     .setTitle('Commands')
     .setDescription('`z!help Music`\nShow the list of available music commands.')
     .setColor(0xFFFF00)
-  
+
   if (!args[0]) return message.channel.send(embedo)
-  
+
   let embed = new Discord.MessageEmbed()
     .setColor(0xFFFF00)
     .setTitle('**Music Commands**')
@@ -21,11 +21,12 @@ module.exports.run = async (client, message, args, ops) => {
     .addField('Volume', 'Changes the volume of the song currently playing in the guild\nUsage: `z!volume`')
     .addField('Remove', 'Removes the song at the specificed queue position\nUsage: `z!remove`')
     .setFooter('Showing the list of currently available cmds')
-  
+
   if (args[0].toUpperCase() == 'M' || args[0].toUpperCase() == 'MUSIC') return message.channel.send(embed)
-  
+
 }
 
 module.exports.help = {
-  name: "help"
+  name: "help",
+  guildOnly: true
 }

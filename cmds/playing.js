@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args, ops) => {
   let data = ops.active.get(message.guild.id) || {};
   let queue = fetched.queue;
   let nowPlaying = queue[0];
-  
+
   let time = millisToMinutesAndSeconds(data.dispatcher.streamTime);
 
   let resp = `Now Playing: **${nowPlaying.songTitle}** | Requested by: **${nowPlaying.requester}**`;
@@ -18,7 +18,7 @@ module.exports.run = async (client, message, args, ops) => {
     .setColor(0xffff00)
     .setImage(`https://img.youtube.com/vi/${nowPlaying.thumbnail}/maxresdefault.jpg`, true)
     .setDescription(`${resp}\n\nCurrent Elapsed Time: **${time} - ${data.queue[0].durationMin}:${data.queue[0].durationSec}**\n\nLink to track: [Click Here](${queue[0].url})`)
-  
+
   message.channel.send(embed)
 }
 
@@ -29,5 +29,6 @@ function millisToMinutesAndSeconds(millis) {
 }
 
 module.exports.help = {
-  name: 'playing'
+  name: 'playing',
+  guildOnly: true
 }

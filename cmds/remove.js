@@ -19,5 +19,6 @@ module.exports.run = async (client, message, args, ops) => {
 
 module.exports.help = {
   name: 'remove',
-  aliases: ['delete', 'trash']
+  aliases: ['delete', 'trash'],
+  guildOnly: true
 }

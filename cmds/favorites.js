@@ -36,5 +36,6 @@ module.exports.run = async function (client, message, args, ops) {
 }
 
 module.exports.help = {
-  name: 'favorites'
+  name: 'favorites',
+  guildOnly: true
 }

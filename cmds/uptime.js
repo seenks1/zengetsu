@@ -7,10 +7,11 @@ module.exports.run = async (client, message, args, ops) => {
   let minutes = Math.floor(totalSeconds / 60);
   let seconds = totalSeconds % 60;
   let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${Math.trunc(seconds)} seconds`;
-  
+
   message.channel.send(uptime)
 }
 
 module.exports.help = {
-	name: 'uptime'
+	name: 'uptime',
+  guildOnly: true
 }

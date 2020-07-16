@@ -9,13 +9,14 @@ module.exports.run = async (client, message, args, ops) => {
 	} else if (loop === true) {
 		loop = false;
 		message.channel.send(' 🛑 Stopping queue loop! 🛑');
-		
+
 	}
 	module.exports.loop = loop;
-	
+
 }
 
 module.exports.loop = loop;
 module.exports.help = {
-	name: "loop"
+	name: "loop",
+	guildOnly: true
 }

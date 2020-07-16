@@ -105,7 +105,14 @@ client.on('message', async message => {
 	let command = messageArray[0]
 	let args = messageArray.slice(1)
 	const mess = message.content.toLowerCase();
+
 	let cmd = client.commands.get(command.slice('z!'.length)) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(command.slice('z!'.length)));
+
+  if (cmd.help.guildOnly && message.channel.type !== 'text') {
+
+	   return message.reply('I can\'t execute that command inside DMs!');
+  }
+
 	if (cmd && message.content.startsWith('z!')) {
     cmd.run(client, message, args, ops)
   } else if (!cmd && message.content.startsWith('z!')) {

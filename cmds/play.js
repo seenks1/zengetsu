@@ -186,5 +186,6 @@ function finish(client, ops, dispatcher) {
 
 module.exports.help = {
   name: "play",
-  aliases: ["p", "music"]
+  aliases: ["p", "music"],
+  guildOnly: true
 };

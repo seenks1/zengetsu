@@ -33,5 +33,6 @@ module.exports.run = async (client, message, args, ops) => {
 
 module.exports.help = {
   name: "queue",
-  aliases: ['q', 'qe']
+  aliases: ['q', 'qe'],
+  guildOnly: true
 };

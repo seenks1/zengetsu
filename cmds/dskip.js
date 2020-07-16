@@ -10,14 +10,15 @@ module.exports.run = async function(client, message, args, ops) {
 	} else if (skip === true) {
 		skip = false;
 		message.channel.send('Skipping has been enabled!');
-		
+
 	}
 	module.exports.skip = skip;
-	
+
 }
 
-module.exports.skip = skip; 
+module.exports.skip = skip;
 
 module.exports.help = {
-  name: 'dskip'
+  name: 'dskip',
+  guildOnly: true
 }
