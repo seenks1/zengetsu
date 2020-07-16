@@ -108,7 +108,7 @@ client.on('message', async message => {
 
 	let cmd = client.commands.get(command.slice('z!'.length)) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(command.slice('z!'.length)));
 
-  if (cmd.help.guildOnly && message.channel.type !== 'text') {
+  if (cmd && cmd.help.guildOnly && message.channel.type !== 'text') {
 
 	   return message.reply('I can\'t execute that command inside DMs!');
   }
