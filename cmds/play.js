@@ -175,6 +175,15 @@ function finish(client, ops, dispatcher) {
   }
 
   if (fetched.queue.length > 0) {
+
+    let vc = client.guilds.resolve(dispatcher.guildID).me.voice.channel;
+
+    if(vc.members.size <= 1) {
+      channel.send('No one left in Voice Channel.')
+      ops.active.delete(dispatcher.guildID);
+      return vc.leave();
+    }
+
     ops.active.set(dispatcher.guildID, fetched);
 
     play(client, ops, fetched);
@@ -183,6 +192,7 @@ function finish(client, ops, dispatcher) {
 
     let vc = client.guilds.resolve(dispatcher.guildID).me.voice.channel;
     if (vc) {
+      channel.send('No more music to play.')
       vc.leave();
     }
   }

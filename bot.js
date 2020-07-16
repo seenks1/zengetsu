@@ -75,7 +75,7 @@ dbl.on('error', e => {
  console.log(`Oops! ${e}`);
 })
 
-client.on("guildMemberAdd", function(message){
+client.on("guildMemberAdd", function(message) {
 	let guild = message.guild;
 	let member = message;
 	let membercount = client.users.size;
