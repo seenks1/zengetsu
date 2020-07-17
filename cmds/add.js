@@ -1,5 +1,5 @@
 const Keyv = require('keyv');
-const keyv = new Keyv(`postgresql://${process.env.DATABASE_URL}`);
+const keyv = new Keyv('sqlite://data/favorites.sqlite');
 
 module.exports.run = async function (client, message, args, ops) {
 
