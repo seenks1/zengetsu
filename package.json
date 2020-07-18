@@ -34,7 +34,9 @@
     "fs-readdir-recursive": "^1.1.0",
     "common-tags": "1.8.0",
     "beautify": "^0.0.8",
-    "relevant-urban": "^2.0.0"
+    "relevant-urban": "^2.0.0",
+    "trivia-api": "^1.0.1",
+    "wtf_wikipedia": "^8.4.0"
   },
   "devDependencies": {
     "minimist": ">=1.2.2"
