@@ -32,7 +32,7 @@ client.on("ready",  async () => {
 		console.log(`Bot is ready!`);
 
 		try {
-			let link = await client.generateInvite(["MANAGE_MESSAGES", 'EMBED_LINKS']);
+			let link = await client.generateInvite(["MANAGE_MESSAGES", 'EMBED_LINKS', 'MANAGE_CHANNELS', 'KICK_MEMBERS', 'BAN_MEMBERS', 'MANAGE_ROLES']);
 			console.log(link);
 		} catch(e) {
 			console.log(e.stack);
@@ -98,6 +98,7 @@ client.on('message', async message => {
       if (parseInt(msgCount) === 5) {
 
           const mute = (message.guild.roles.cache.find(name => name.name === 'Muted'))
+          if (!message.guild.me.hasPermission('MANAGE_ROLES')) return message.channel.send('I cannot mute this user as I am missing the `MANAGE_ROLES` permission.')
           message.member.roles.add(mute);
           message.reply('You have been muted by the spam filter.')
 
@@ -165,5 +166,29 @@ client.on('message', async message => {
 	console.log(e.stack);
 }
 });
+
+client.on('guildCreate', async (guild) => {
+  if(!guild.roles.cache.find(r => r.name === 'Muted')) {
+    await guild.roles.create({
+      data: {
+        name: 'Muted',
+        color: 'GREY'
+      }
+    })
+
+    let role = guild.roles.cache.find(r => r.name === 'Muted');
+    let arr = [];
+    message.guild.channels.cache.forEach(channel => {
+      channel.createOverwrite(role,
+        {
+          SEND_MESSAGES: false
+        })
+        arr.push(channel)
+    })
+    let anonChannel = arr[Math.floor(Math.random() * arr.length)];
+    return anonChannel.send('Hello! I\'ve gone ahead and setup a Mute role and created overwrites in each known text channel!')
+
+  }
+})
 
 client.login(process.env.DISCORD_TOKEN);
