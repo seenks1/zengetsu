@@ -181,7 +181,7 @@ client.on('guildCreate', async guild => {
     let role = guild.roles.cache.find(r => r.name === 'Muted');
     let arr = [];
     guild.channels.cache.forEach(channel => {
-      channel.createOverwrite(role,
+      channel.updateOverwrite(role,
         {
           SEND_MESSAGES: false
         })
