@@ -18,7 +18,6 @@ files.forEach(file => {
   let cmdFind = file.replace('.js', '')
   let props = require(`./cmds/${cmdFind}`)
 });
-})
 
 client.on("ready",  async () => {
 
