@@ -17,6 +17,7 @@ const files = read('./cmds/');
 files.forEach(file => {
   let cmdFind = file.replace('.js', '')
   let props = require(`./cmds/${cmdFind}`)
+  client.commands.set(props.help.name, props);
 });
 
 client.on("ready",  async () => {
