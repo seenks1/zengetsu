@@ -9,7 +9,7 @@ module.exports.run = async function (client, message, args, ops) {
   const url = `https://instagram.com/${name}/?__a=1`;
   const res = fetch(url => url.json());
 
-  if (!res.graphql.user.username) return message.channel.send('I couldn\'t find that user')
+  if (!res.graphql.user) return message.channel.send('I couldn\'t find that user')
 
   const account = res.graphql.user;
 
