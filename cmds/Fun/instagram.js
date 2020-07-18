@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 
 module.exports.run = async function (client, message, args, ops) {
   const name = args.join(' ')
-  if (!name) return message.reply('Please supply an instagram username').then(m => m.delete(5000));
+  if (!name) return message.reply('Please supply an instagram username')
 
   const url = `https://instagram.com/${name}/?__a=1`;
   const res = fetch(url => url.json());

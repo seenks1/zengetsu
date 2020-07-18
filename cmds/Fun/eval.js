@@ -25,7 +25,7 @@ module.exports.run = async function (client, message, args, ops) {
     let embed = new Discord.MessageEmbed()
       .setColor('RANDOM')
       .setTitle('\:x: Error!')
-      .setDescription(e.message)
+      .setDescription(err.message)
       .setFooter(client.user.username, client.user.displayAvatarURL())
   }
 
