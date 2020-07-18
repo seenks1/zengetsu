@@ -1,5 +1,5 @@
 const fs = require('fs')
-const fs_recur = require('fs-readdir-recursive');
+const read = require('fs-readdir-recursive');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const ownerID = '708769168744251422'
