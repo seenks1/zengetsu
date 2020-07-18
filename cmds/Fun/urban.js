@@ -1,7 +1,7 @@
 const urban = require('relevant-urban')
 const Discord = require('discord.js')
 
-module.exports.run = async function (client, message, args, ops) => {
+module.exports.run = async function (client, message, args, ops) {
   if (!args[0]) return message.channel.send('Specify some text to search for.')
   let res = await urban(args.join(' ')).catch(e => {
     return message.channel.send('That word could not be found.')
