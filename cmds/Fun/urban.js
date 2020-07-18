@@ -21,3 +21,8 @@ module.exports.run = async function (client, message, args, ops) {
 
     message.channel.send(embed);
 }
+
+module.exports.help = {
+  name: 'urban',
+  aliases: ['ur']
+}
