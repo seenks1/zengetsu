@@ -81,7 +81,7 @@ client.on("guildMemberAdd", function(message) {
 client.on('message', async message => {
 
   if (message.author.bot) return;
-  
+
   if (usersMap.has(message.author.id)) {
     const userData = usersMap.get(message.author.id);
     const { lastMessage, timer} = userData;
@@ -165,6 +165,11 @@ client.on('message', async message => {
 } catch (e) {
 	console.log(e.stack);
 }
+
+setTimeout(() => {
+	cooldown.delete(message.author.id)
+}, cdseconds * 1000)
+
 });
 
 client.on('guildCreate', async guild => {
