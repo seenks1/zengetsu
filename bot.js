@@ -176,6 +176,7 @@ client.on('guildCreate', async guild => {
         color: 'GREY'
       }
     })
+  }
 
     let role = guild.roles.cache.find(r => r.name === 'Muted');
     let arr = [];
@@ -191,7 +192,6 @@ client.on('guildCreate', async guild => {
     console.log('Finished!')
     return anonChannel.send('Hello! I\'ve gone ahead and setup a Mute role and created overwrites in each known text channel!')
 
-  }
 })
 
 client.login(process.env.DISCORD_TOKEN);
