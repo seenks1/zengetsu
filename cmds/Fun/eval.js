@@ -27,6 +27,8 @@ module.exports.run = async function (client, message, args, ops) {
       .setTitle('\:x: Error!')
       .setDescription(err.message)
       .setFooter(client.user.username, client.user.displayAvatarURL())
+
+    message.channel.send(embed)
   }
 
 }
