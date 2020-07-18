@@ -80,7 +80,7 @@ client.on("guildMemberAdd", function(message) {
 
 client.on('message', async message => {
 
-  if (usersMap.has(message.author.id)) {
+  if (usersMap.has(message.author.id) && !message.author.bot) {
     const userData = usersMap.get(message.author.id);
     const { lastMessage, timer} = userData;
     let difference = message.createdTimestamp - lastMessage.createdTimestamp;
