@@ -173,7 +173,6 @@ setTimeout(() => {
 });
 
 client.on('guildCreate', async guild => {
-  console.log('Event fired!')
   if(!guild.roles.cache.find(r => r.name === 'Muted')) {
     await guild.roles.create({
       data: {
@@ -194,7 +193,6 @@ client.on('guildCreate', async guild => {
     })
 
     let anonChannel = arr[Math.floor(Math.random() * arr.length)];
-    console.log('Finished!')
     return anonChannel.send('Hello! I\'ve gone ahead and setup a Mute role and created overwrites in each known text channel!')
 
 })

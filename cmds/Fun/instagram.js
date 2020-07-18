@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const stripIndents = require("common-tags");
+const { stripIndents } = require("common-tags");
 const fetch = require("node-fetch");
 
 module.exports.run = async function (client, message, args, ops) {
@@ -7,23 +7,24 @@ module.exports.run = async function (client, message, args, ops) {
   if (!name) return message.reply('Please supply an instagram username')
 
   const url = `https://instagram.com/${name}/?__a=1`;
-  const res = fetch(url => url.json());
+  const res = await fetch(url).then(t => t.json());
 
-  if (!res.graphql.user) return message.channel.send('I couldn\'t find that user')
+  if (!res.graphql.user.username) return message.channel.send('I couldn\'t find that user')
 
   const account = res.graphql.user;
 
   const embed = new Discord.MessageEmbed()
     .setColor('RANDOM')
-    .setTitle(account.fullname)
+    .setTitle(account.full_name)
     .setURL(account.external_url_linkshimmed)
     .addField("Profile Information", stripIndents`**- Username:** ${account.username}
     **- Full name:** ${account.full_name}
     **- Biography; ** ${account.biography.length == 0 ? "none" : account.biography}
-    **- Posts:** ${user.edge_owner_to_timeline_media}
+    **- Posts:** ${account.edge_owner_to_timeline_media}
     **- Followers:** ${account.edge_follow.count}
     **- Following:** ${account.edge_follow.count}
-    **- Private Account:** ${account.is_private} ? "Yes" : Nope"`);
+    **- Private Account:** ${account.is_private ? "Yes" : "Nope"}`)
+    .setThumbnail(account.profile_pic_url_hd)
 
   message.channel.send(embed)
 
