@@ -12,7 +12,7 @@ module.exports.run = async function (client, message, args, ops) {
   await member.kick()
   var reason = args.slice(1).join(' ');
   let embed = new Discord.MessageEmbed()
-    .setColor(0xadd8e6)
+    .setColor(0xffff00)
     .setTitle('User Kicked:')
     .setDescription(`${message.mentions.members.first()} has been kicked\n\nReason: **${reason}**`)
     .addField(`Moderator:`, message.author)

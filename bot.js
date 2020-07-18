@@ -4,6 +4,9 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const ownerID = '708769168744251422'
 const active = new Map();
+let cooldown = new Set()
+let cdseconds = 5;
+const usersMap = new Map();
 client.commands = new Discord.Collection();
 
 const configuration = {
@@ -76,6 +79,45 @@ client.on("guildMemberAdd", function(message) {
 });
 
 client.on('message', async message => {
+
+  if (usersMap.has(message.author.id)) {
+    const userData = usersMap.get(message.author.id);
+    const { lastMessage, timer} = userData;
+    let difference = message.createdTimestamp - lastMessage.createdTimestamp;
+    let msgCount = userData.msgCount;
+    if(difference > 2500) {
+      clearTimeout(timer);
+      userData.msgCount = 1;
+      userData.lastMessage = message;
+      userData.timer = setTimeout(() => {
+        usersMap.delete(message.author.id);
+      }, 5000);
+      usersMap.set(message.author.id, userData);
+    } else {
+      msgCount++;
+      if (parseInt(msgCount) === 5) {
+
+          const mute = (message.guild.roles.cache.find(name => name.name === 'Muted'))
+          message.member.roles.add(mute);
+          message.reply('You have been muted by the spam filter.')
+
+      } else {
+
+        userData.msgCount = msgCount;
+        usersMap.set(message.author.id, userData);
+      }
+    }
+  } else {
+    let fn = setTimeout(() => {
+      usersMap.delete(message.author.id);
+    }, 5000);
+    usersMap.set(message.author.id, {
+      msgCount: 1,
+      lastMessage: message,
+      timer: fn
+    });
+  }
+
 	let messageArray = message.content.split(/\s+/g);
 	let command = messageArray[0]
 	let args = messageArray.slice(1)
@@ -92,6 +134,16 @@ client.on('message', async message => {
 		ownerID: ownerID,
     active: active
 	}
+
+  if(!message.content.startsWith('z!')) return;
+  if(cooldown.has(message.author.id)){
+    message.delete();
+    return message.reply('You have to wait 5 seconds between commands.')
+  }
+
+  if(!message.member.hasPermission("ADMINISTRATOR")){
+    cooldown.add(message.author.id);
+  }
 
 	let command = messageArray[0]
 	let args = messageArray.slice(1)
