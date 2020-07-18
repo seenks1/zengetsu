@@ -1,5 +1,5 @@
 const Keyv = require('keyv');
-const keyv = new Keyv('postgresql://bdzrbevgbfachh:6732784c679185c83783e18da2478b615487c5205760beb09a1dcafafd1fc8d2@localhost:5432/d8rkfoqline6qp');
+const keyv = new Keyv('postgres://bdzrbevgbfachh:6732784c679185c83783e18da2478b615487c5205760beb09a1dcafafd1fc8d2@ec2-50-19-26-235.compute-1.amazonaws.com:5432/d8rkfoqline6qp');
 
 module.exports.run = async function (client, message, args, ops) {
 
