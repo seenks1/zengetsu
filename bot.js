@@ -1,4 +1,5 @@
 const fs = require('fs')
+const fs_recur = require('fs-readdir-recursive');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const ownerID = '708769168744251422'
@@ -11,23 +12,13 @@ const configuration = {
 
 let statuses = ['Hanging with the boys!', 'Breaking the mainframe', 'Coding...', 'Creating a better world...'];
 
+const files = read('./cmds/');
 
-fs.readdir("./cmds/", (err, files) => {
-	if (err) console.error(err);
-	 let jsfiles = files.filter(f => f.split(".").pop() === 'js');
-	 if(jsfiles.length <= 0) {
-		 console.log('Not able to load any commands!');
-		 return;
-	 }
-
-	 console.log(`Loading ${jsfiles.length} commands!`);
-
-	 jsfiles.forEach((f,i) => {
-		let props = require(`./cmds/${f}`);
-		console.log(`${i + 1}: ${f} loaded!`);
-		client.commands.set(props.help.name, props);
-	 });
+files.forEach(file => {
+  let cmdFind = file.replace('.js', '')
+  let props = require(`./cmds/${cmdFind}`)
 });
+})
 
 client.on("ready",  async () => {
 

@@ -165,11 +165,11 @@ async function play(client, ops, data) {
   //data.dispatcher = await data.connection.playConvertedStream(await pcm, {filter: 'audioonly', quality: 'highestaudio', highwatermark: 1>>25});
   data.dispatcher.guildID = data.guildID;
   data.dispatcher.once("finish", function() {
-    finish(client, ops, data);
+    finish(client, ops, data, channel);
   });
 }
 
-function finish(client, ops, dispatcher) {
+function finish(client, ops, dispatcher, channel) {
   let loop = require("./loop.js");
   let fetched = ops.active.get(dispatcher.guildID);
   if (loop.loop === true) {
