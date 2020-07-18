@@ -80,7 +80,9 @@ client.on("guildMemberAdd", function(message) {
 
 client.on('message', async message => {
 
-  if (usersMap.has(message.author.id) && !message.author.bot) {
+  if (message.author.bot) return;
+  
+  if (usersMap.has(message.author.id)) {
     const userData = usersMap.get(message.author.id);
     const { lastMessage, timer} = userData;
     let difference = message.createdTimestamp - lastMessage.createdTimestamp;
@@ -126,8 +128,6 @@ client.on('message', async message => {
 		//message.delete()
 		//message.channel.send('Silence Mortal');
 	//}
-
-	if (message.author.bot) return;
 
   try {
 	let messageArray = message.content.split(/\s+/g);
