@@ -8,17 +8,19 @@ module.exports.run = async function (client, message, args, ops) {
   message.channel.send(`${message.mentions.users.first()}, you\'ve been challenged to a duel by ${message.author}, do you accept?`)
   const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.mentions.users.first().id);
   collector.on('collect', message => {
-    if (message.content.includes('yes')) {
+    if (message.content.toLowerCase().includes('yes') || message.content.toLowerCase().includes('yup')) {
       showdown(client, message, args, user1, user2)
-    }
+    } else if (message.content.toLowerCase().includes('yes') || message.content.toLowerCase().includes('yup')) {
+        return message.channel.send('Declined!')
+      }
+
     collector.stop()
   })
 
   async function showdown (client, message, args, user1, user2) {
     message.channel.send('First one to type `shoot` when the clock strikes wins!')
-    setTimeout(function(){
-      message.channel.send('Ding!');
-    }, 3000);
+    message.channel.send('Ding!');
+    await new Promise(done => setTimeout(done, 3000));
     let scollector = new Discord.MessageCollector(message.channel, m => m.author.id == user1 || m.author.id == user2);
     scollector.on('collect', message => {
       if (message.content.includes('shoot')) message.channel.send(`${message.author} has won the showdown!`)
