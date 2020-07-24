@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 const beautify = require("beautify")
 
 module.exports.run = async function (client, message, args, ops) {
-  if (message.author.id !== '188827236734861312') return message.channel.send("Only the both author can run `eval`")
+  if (message.author.id !== '161949636527915010') return message.channel.send("Only the both author can run `eval`")
 
   if (!args[0]) return message.channel.send('You need to evaluate something')
 
