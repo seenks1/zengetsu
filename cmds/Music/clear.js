@@ -10,7 +10,7 @@ module.exports.run = async function(client, message, args, ops) {
   for (var i = 1; i < queue.length;) {
     queue.splice(i, 1)
   }
-  message.channel.send('❌ All elements in the queue have been removed.')
+  message.channel.send('❌ All elements in the queue have been removed!')
 }
 
 

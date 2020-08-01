@@ -14,9 +14,7 @@ module.exports.run = async function (client, message, args, ops) {
       showdown(client, message, args, user1, user2)
     } else if (message.content.toLowerCase().includes('no') || message.content.toLowerCase().includes('nope')) {
         message.channel.send('Declined!')
-    } else {
-      message.channel.send('Invalid response')
-    }
+      }
 
     collector.stop('Finished')
   })

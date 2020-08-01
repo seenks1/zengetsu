@@ -5,6 +5,7 @@ const fs = require("fs");
 const Discord = require('discord.js')
 const YouTube = require("simple-youtube-api");
 const fetch = require('node-fetch');
+//import Soundcloud from 'soundcloud.ts'
 let loop = require("./loop.js");
 
 const { getData, getPreview } = require("spotify-url-info");
@@ -56,6 +57,9 @@ module.exports.run = async (client, message, args, ops) => {
 
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
       return message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
+      //const soundcloud = new Soundcloud()
+      //const track = await soundcloud.tracks.get(args[0])
+      //console.log(track)
 
   } else if (!validate && args[0].includes("https://open.spotify.com/playlist") || args[0].includes('https://open.spotify.com/album/')) {
     let playData = await getData(args[0])

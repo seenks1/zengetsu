@@ -1,3 +1,4 @@
+const solenolyrics = require("solenolyrics");
 const Discord = require("discord.js");
 const Genius = require("genius-lyrics")
 const genius = new Genius.Client('3A2SNZticI1E2Yyd7U1OiZsCQ7v_cz2HZWUnkMisKoYng-zmTpRt6hCJJLqB2SUC')
@@ -12,11 +13,13 @@ module.exports.run = async (client, message, args, ops) => {
 
   async function lyrics() {
      try {
-          let results = await genius.tracks.search(nowPlaying.songTitle);
+          let results = await genius.tracks.search(nowPlaying.songTitle); //even tho limit is 1, it will be inside an array
           const song = results[0];
           const lyrics = await song.lyrics()
           return lyrics
+          //console.log(lyrics);
      } catch(e) {
+          //message.channel.send('Foreign Characters cannot be printed!')
           console.log(e);
      }
   }
@@ -25,6 +28,7 @@ module.exports.run = async (client, message, args, ops) => {
   let page = 1;
 
   var lyrics = await lyrics();
+  //var lyrics1 = await solenolyrics.requestLyricsFor(queue[0].songTitle);
 
   try {
     var words = lyrics.split(" ");
