@@ -5,7 +5,6 @@ const fs = require("fs");
 const Discord = require('discord.js')
 const YouTube = require("simple-youtube-api");
 const fetch = require('node-fetch');
-//import Soundcloud from 'soundcloud.ts'
 let loop = require("./loop.js");
 
 const { getData, getPreview } = require("spotify-url-info");
@@ -13,6 +12,10 @@ const youtube = new YouTube("AIzaSyCwGh6sW0oPGsMwvWroAPssXPwm33L_zRw");
 
 module.exports.run = async (client, message, args, ops) => {
   if (!message.member.voice.channel) return message.channel.send("You are not currently connected to a voice channel!");
+  if (message.guild.me.voice.channel) {
+    if (message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send('Sorry, you currently aren\'t in my voice channel!');
+  }
+  
   let voiceChannel = message.member.voice.channel;
 
   if (!args[0])
@@ -35,9 +38,7 @@ module.exports.run = async (client, message, args, ops) => {
     console.log(err.stack)
     return message.channel.send('An error has occured: ' + err.message)
   }
-    return message.channel.send(
-      ` Playlist: **${playlist.title}** has been added to the queue.`
-    );
+    return message.channel.send(` Playlist: **${playlist.title}** has been added to the queue.`);
   } else if (!validate && args[0].includes("https://open.spotify.com/track/")) {
       try {
 
@@ -57,9 +58,6 @@ module.exports.run = async (client, message, args, ops) => {
 
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
       return message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
-      //const soundcloud = new Soundcloud()
-      //const track = await soundcloud.tracks.get(args[0])
-      //console.log(track)
 
   } else if (!validate && args[0].includes("https://open.spotify.com/playlist") || args[0].includes('https://open.spotify.com/album/')) {
     let playData = await getData(args[0])
@@ -125,7 +123,7 @@ module.exports.run = async (client, message, args, ops) => {
       play(client, ops, data);
     } else {
       if (playlist) return undefined;
-      else message.channel.send(`Loading...`).then((sentMessage) => sentMessage.edit(`Added To Queue: **${info.title}** | Request By: ${data.queue[data.queue.length - 1].requester} `)).then(msg => {msg.delete({timeout: 10000});});
+      else message.channel.send(`Loading...`).then((sentMessage) => sentMessage.edit(`Added To Queue: **${info.title}** | Request By: ${data.queue[data.queue.length - 1].requester} `, {allowedMentions: {parse: []}})).then(msg => {msg.delete({timeout: 10000});});
     }
 
     ops.active.set(message.guild.id, data);
@@ -145,7 +143,7 @@ async function play(client, ops, data) {
   var channel = client.channels.cache.get(data.queue[0].announcementChannel);
   channel
     .send(
-      `🎵 Now Playing: **${data.queue[0].songTitle}** 🎵 | Requested by: @${data.queue[0].requester}`
+      `🎵 Now Playing: **${data.queue[0].songTitle}** 🎵 | Requested by: @${data.queue[0].requester}`, {allowedMentions: {parse: []}}
     )
     .then(msg => {
       msg.delete({timeout: 10000});

@@ -13,7 +13,7 @@ module.exports.run = async function (client, message, args, ops) {
 
   var reason = args.slice(1).join(' ');
   let embed = new Discord.MessageEmbed()
-    .setColor(0xadd8e6)
+    .setColor(0xffff00)
     .setTitle('User Banned:')
     .setDescription(`${message.mentions.members.first()} has been banned\nReason: ${reason}`)
     .addField(`Moderator:`, message.author)

@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args, ops) => {
 
 	fetched.dispatcher.setVolume(args[0]/200);
 
-	message.channel.send(`🔊 Successfully set the volume of **${fetched.queue[0].songTitle}** to ${args[0]} 🔊`);
+	message.channel.send(`🔊 Successfully set the volume of **${fetched.queue[0].songTitle}** to ${args[0]} 🔊`, {allowedMentions: {parse: []}});
 }
 
 module.exports.help = {

@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args, ops) => {
 
 	fetched.dispatcher.pause();
 
-	message.channel.send(`✖️ Successfully paused **${fetched.queue[0].songTitle}**. ✖️`);
+	message.channel.send(`✖️ Successfully paused **${fetched.queue[0].songTitle}**. ✖️`, {allowedMentions: {parse: []}});
 }
 
 module.exports.help = {
