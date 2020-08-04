@@ -26,7 +26,7 @@ files.forEach(file => {
 client.on("ready",  async () => {
 
       setInterval(() => {
-        dbl.postStats(client.guilds.size);
+        dbl.postStats(client.guilds.cache.size);
     }, 1800000);
 
 		console.log(`Bot is ready!`);
@@ -81,7 +81,7 @@ client.on("guildMemberAdd", function(message) {
 client.on('message', async message => {
 
   if (message.author.bot) return;
-
+/*
   if (usersMap.has(message.author.id)) {
     const userData = usersMap.get(message.author.id);
     const { lastMessage, timer} = userData;
@@ -120,10 +120,12 @@ client.on('message', async message => {
       timer: fn
     });
   }
+  */
 
 	let messageArray = message.content.split(/\s+/g);
 	let command = messageArray[0]
 	let args = messageArray.slice(1)
+
 	//if (message.member.roles.has('684020865804795921')) {
 		//message.delete()
 		//message.channel.send('Silence Mortal');
@@ -142,9 +144,9 @@ client.on('message', async message => {
     return message.reply('You have to wait 5 seconds between commands.')
   }
 
-  if(!message.member.hasPermission("ADMINISTRATOR")){
-    cooldown.add(message.author.id);
-  }
+  //if(!message.member.hasPermission("ADMINISTRATOR")){
+    //cooldown.add(message.author.id);
+  //}
 
 	let command = messageArray[0]
 	let args = messageArray.slice(1)
@@ -160,7 +162,7 @@ client.on('message', async message => {
 	if (cmd && message.content.startsWith('z!')) {
     cmd.run(client, message, args, ops)
   } else if (!cmd && message.content.startsWith('z!')) {
-    message.channel.send('That command doesn\'t exist!')
+    //message.channel.send('That command doesn\'t exist!')
   }
 } catch (e) {
 	console.log(e.stack);
@@ -171,7 +173,7 @@ setTimeout(() => {
 }, cdseconds * 1000)
 
 });
-
+/*
 client.on('guildCreate', async guild => {
   if(!guild.roles.cache.find(r => r.name === 'Muted')) {
     await guild.roles.create({
@@ -196,5 +198,6 @@ client.on('guildCreate', async guild => {
     return anonChannel.send('Hello! I\'ve gone ahead and setup a Mute role and created overwrites in each known text channel!')
 
 })
+*/
 
 client.login(process.env.DISCORD_TOKEN);
