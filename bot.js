@@ -51,8 +51,8 @@ client.on("ready",  async () => {
 
  client.on('messageDelete', message => {
   console.log(`${message.id} was deleted!`);
-  if (!message.partial) {
-    console.log(`Someone deleted a message! It had content: **"${message.content}"**`);
+  if (!message.partial && message.guild.id === '569978436622352404') {
+    message.channel.send(`Someone deleted a message! It had content: **"${message.content}"**`);
   }
 });
 
