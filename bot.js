@@ -50,10 +50,9 @@ client.on("ready",  async () => {
 });
 
  client.on('messageDelete', message => {
-  //console.log(`${message.id} was deleted!`);
-  // Partial messages do not contain any content so skip them
+  console.log(`${message.id} was deleted!`);
   if (!message.partial) {
-    //console.log(`Someone deleted a message! It had content: **"${message.content}"**`);
+    console.log(`Someone deleted a message! It had content: **"${message.content}"**`);
   }
 });
 
