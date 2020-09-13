@@ -49,13 +49,6 @@ client.on("ready",  async () => {
 		}, 3000)
 });
 
- client.on('messageDelete', message => {
-  console.log(`${message.id} was deleted!`);
-  if (!message.partial && message.guild.id === '569978436622352404') {
-    message.channel.send(`Someone deleted a message! It had content: **"${message.content}"**`);
-  }
-});
-
 const DBL = require("dblapi.js");
 const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NTc3OTI0NDE3NzE2MjI0MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTkwNjc2MzIxfQ.XO3u04U_eprLnTk4O56gd2p4YeF1DemZFRZ7_KBM6XU', client);
 
