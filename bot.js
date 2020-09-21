@@ -185,4 +185,4 @@ client.on('guildCreate', async guild => {
 })
 */
 
-client.login("NjQ1Nzc5MjQ0MTc3MTYyMjQw.XdHiyQ.ewxZJNUNOIkjJMJ7VCrdDco8wSQ");
+client.login(process.env.DISCORD_TOKEN);
