@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const Keyv = require('keyv');
-const keyv = new Keyv(process.env.DATABASE_URL);
+//const keyv = new Keyv(process.env.DATABASE_URL);
 const magicPages = []
 const magTypes = ['fire', 'wind', 'ice', 'earth', 'water', 'psychic', 'demonic']
 const { stripIndents } = require('common-tags')

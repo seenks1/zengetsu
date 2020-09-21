@@ -9,10 +9,6 @@ let cdseconds = 5;
 const usersMap = new Map();
 client.commands = new Discord.Collection();
 
-const configuration = {
-  token: process.env.DISCORD_TOKEN
-};
-
 let statuses = ['Hanging with the boys!', 'Breaking the mainframe', 'Coding...', 'Creating a better world...'];
 
 const files = read('./cmds/');
@@ -38,15 +34,12 @@ client.on("ready",  async () => {
 			console.log(e.stack);
 		}
 
-		setInterval(function() {
-
 			let status = statuses[Math.floor(Math.random()*statuses.length)];
 
 			client.user.setPresence({ game: { name: status }, status: 'online'});
 
 			client.user.setPresence({ activity: { name: status }, status: 'online' });
 
-		}, 3000)
 });
 
 const DBL = require("dblapi.js");
@@ -192,4 +185,4 @@ client.on('guildCreate', async guild => {
 })
 */
 
-client.login(process.env.DISCORD_TOKEN);
+client.login("NjQ1Nzc5MjQ0MTc3MTYyMjQw.XdHiyQ.ewxZJNUNOIkjJMJ7VCrdDco8wSQ");
