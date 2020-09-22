@@ -10,3 +10,5 @@ Commands:
 9. z!favorites - View your favorited songs
 10. z!add - Add the currently playing song to your favorites list
 11. z!clear - Clears the current working queue
+
+[![Run on Repl.it](https://repl.it/badge/github/KinetixGaming/zengetsu)](https://repl.it/github/KinetixGaming/zengetsu)
